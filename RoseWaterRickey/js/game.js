@@ -42,17 +42,21 @@ function createGame() {
     superman.body.gravity.y = 300;
     superman.body.collideWorldBounds = true;
 
-    batman.animations.add('moveLeft', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
-    batman.animations.add('moveRight', [7, 8, 9, 10, 11, 12, 13, 14, 15], 10, true);
+    batman.animations.add('moveLeft', [9, 10, 11, 12, 13, 14, 15, 16, 17], 10, true);
+    batman.animations.add('moveRight', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
 
-    batman.animations.add('turnLeft', [0]);
-    batman.animations.add('turnRight', [15]);
+    batman.animations.add('turnLeft', [13]);
+    batman.animations.add('turnRight', [0]);
 
-    superman.animations.add('moveLeft', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
-    superman.animations.add('moveRight', [7, 8, 9, 10, 11, 12, 13, 14, 15], 10, true);
+    batman.body.acceleration.y = 280;
 
-    superman.animations.add('turnLeft', [0]);
-    superman.animations.add('turnRight', [15]);
+    superman.animations.add('moveLeft', [7, 8, 9, 10, 11, 12, 13], 10, true);
+    superman.animations.add('moveRight', [0, 1, 2, 3, 4, 5, 6], 10, true);
+
+    superman.animations.add('turnLeft', [13]);
+    superman.animations.add('turnRight', [0]);
+
+    superman.body.acceleration.y = 280;
 }
 
 function update() {
