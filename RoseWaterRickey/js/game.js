@@ -1,4 +1,4 @@
-var platforms, log, batman, superman;
+var platforms, log, batman, superman, wasdKeys, cursorKeys;
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
     preload: preload,
@@ -15,6 +15,14 @@ function preload() {
 }
 
 function createGame() {
+    wasdKeys = {
+        up: game.input.keyboard.addKey(Phaser.Keyboard.W),
+        down: game.input.keyboard.addKey(Phaser.Keyboard.S),
+        left: game.input.keyboard.addKey(Phaser.Keyboard.A),
+        right: game.input.keyboard.addKey(Phaser.Keyboard.D)
+    };
+    cursorKeys = game.input.keyboard.createCursorKeys();
+
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     game.add.sprite(0, 0, 'background');
@@ -58,17 +66,9 @@ function createGame() {
 function update() {
     game.physics.arcade.collide(batman, platforms);
     game.physics.arcade.collide(superman, platforms);
-    
-    var wasd = {
-                up: game.input.keyboard.addKey(Phaser.Keyboard.W),
-                down: game.input.keyboard.addKey(Phaser.Keyboard.S),
-                left: game.input.keyboard.addKey(Phaser.Keyboard.A),
-                right: game.input.keyboard.addKey(Phaser.Keyboard.D),
-            };
-    var key = game.input.keyboard.createCursorKeys();
 
-    reactToUserInput(batman, key);
-    reactToUserInput(superman, wasd);
+    reactToUserInput(batman, cursorKeys);
+    reactToUserInput(superman, wasdKeys);
 }
 
 function reactToUserInput(player, command) {
