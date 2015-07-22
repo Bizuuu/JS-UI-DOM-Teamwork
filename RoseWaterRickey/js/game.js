@@ -1,4 +1,4 @@
-var platforms, log, sq;
+var platforms, log, batman, superman;
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
     preload: preload,
@@ -10,7 +10,8 @@ function preload() {
     game.load.image('background', 'imgs/background.png');
     game.load.image('log', 'imgs/log.png');
     game.load.image('log2', 'imgs/log2.png');
-    game.load.spritesheet('sq', 'imgs/dude.png', 32, 48);
+    game.load.spritesheet('batman', 'imgs/batmanSprite.png', 53, 58);
+    game.load.spritesheet('superman', 'imgs/supermanSprite.png', 38, 58);
 }
 
 function createGame() {
@@ -27,52 +28,73 @@ function createGame() {
         log.body.immovable = true;
     }
 
-    sq = game.add.sprite(20, 20, 'sq', 4);
+    batman = game.add.sprite(20, 20, 'batman', 4);
+    superman = game.add.sprite(20, 30, 'superman', 4);
 
-    game.physics.arcade.enable(sq);
+    game.physics.arcade.enable(batman);
+    game.physics.arcade.enable(superman);
 
-    sq.body.bounce.y = 0.2;
-    sq.body.gravity.y = 300;
-    sq.body.collideWorldBounds = true;
+    batman.body.bounce.y = 0.2;
+    batman.body.gravity.y = 300;
+    batman.body.collideWorldBounds = true;
 
-    sq.animations.add('moveLeft', [0, 1, 2, 3], 10, true);
-    sq.animations.add('moveRight', [5, 6, 7, 8], 10, true);
+    superman.body.bounce.y = 0.2;
+    superman.body.gravity.y = 300;
+    superman.body.collideWorldBounds = true;
 
-    sq.animations.add('turnLeft', [0]);
-    sq.animations.add('turnRight', [8]);
+    batman.animations.add('moveLeft', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
+    batman.animations.add('moveRight', [7, 8, 9, 10, 11, 12, 13, 14, 15], 10, true);
+
+    batman.animations.add('turnLeft', [0]);
+    batman.animations.add('turnRight', [15]);
+
+    superman.animations.add('moveLeft', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
+    superman.animations.add('moveRight', [7, 8, 9, 10, 11, 12, 13, 14, 15], 10, true);
+
+    superman.animations.add('turnLeft', [0]);
+    superman.animations.add('turnRight', [15]);
 
     key = game.input.keyboard.createCursorKeys();
 }
 
 function update() {
-    game.physics.arcade.collide(sq, platforms);
-
-    reactToUserInput();
+    game.physics.arcade.collide(batman, platforms);
+    game.physics.arcade.collide(superman, platforms);
+    
+    var wasd = {
+                up: game.input.keyboard.addKey(Phaser.Keyboard.W),
+                down: game.input.keyboard.addKey(Phaser.Keyboard.S),
+                left: game.input.keyboard.addKey(Phaser.Keyboard.A),
+                right: game.input.keyboard.addKey(Phaser.Keyboard.D),
+            };
+    reactToUserInput(batman, key);
+    reactToUserInput(superman, wasd);
 }
 
-function reactToUserInput() {
-    sq.body.velocity.x = 0;
+function reactToUserInput(player, command) {
 
-    if (key.left.isDown) {
-        sq.body.velocity.x = -200;
+    player.body.velocity.x = 0;
 
-        if (sq.body.touching.down) {
-            sq.animations.play('moveLeft');
+    if (command.left.isDown) {
+        player.body.velocity.x = -200;
+
+        if (player.body.touching.down ) {
+            player.animations.play('moveLeft');
         } else {
-            sq.animations.play('turnLeft');
+            player.animations.play('turnLeft');
         }
-    } else if (key.right.isDown) {
-        sq.body.velocity.x = 200;
-        if (sq.body.touching.down) {
-            sq.animations.play('moveRight');
+    } else if (command.right.isDown) {
+        player.body.velocity.x = 200;
+        if (player.body.touching.down) {
+            player.animations.play('moveRight');
         } else {
-            sq.animations.play('turnRight');
+            player.animations.play('turnRight');
         }
     } else {
-        sq.animations.stop();
+        player.animations.stop();
     }
 
-    if (key.up.isDown && sq.body.touching.down) {
-        sq.body.velocity.y = -350;
+    if (command.up.isDown && player.body.touching.down) {
+        player.body.velocity.y = -350;
     }
 }
