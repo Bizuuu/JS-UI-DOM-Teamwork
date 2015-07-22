@@ -11,7 +11,7 @@ function preload() {
     game.load.image('log', 'imgs/log.png');
     game.load.image('log2', 'imgs/log2.png');
     game.load.spritesheet('batman', 'imgs/batmanSprite.png', 53, 58);
-    game.load.spritesheet('superman', 'imgs/supermanSprite.png', 38, 58);
+    game.load.spritesheet('superman', 'imgs/supermanSprite.png', 53, 58);
 }
 
 function createGame() {
@@ -53,8 +53,6 @@ function createGame() {
 
     superman.animations.add('turnLeft', [0]);
     superman.animations.add('turnRight', [15]);
-
-    key = game.input.keyboard.createCursorKeys();
 }
 
 function update() {
@@ -67,6 +65,8 @@ function update() {
                 left: game.input.keyboard.addKey(Phaser.Keyboard.A),
                 right: game.input.keyboard.addKey(Phaser.Keyboard.D),
             };
+    var key = game.input.keyboard.createCursorKeys();
+
     reactToUserInput(batman, key);
     reactToUserInput(superman, wasd);
 }
