@@ -28,35 +28,31 @@ function createGame() {
         log.body.immovable = true;
     }
 
-    batman = game.add.sprite(20, 20, 'batman', 4);
+    batman = game.add.sprite(720, 20, 'batman', 4);
     superman = game.add.sprite(20, 30, 'superman', 4);
 
-    game.physics.arcade.enable(batman);
-    game.physics.arcade.enable(superman);
 
-    batman.body.bounce.y = 0.2;
-    batman.body.gravity.y = 300;
-    batman.body.collideWorldBounds = true;
+    addPhysicsToPlayer(batman);
+    addPhysicsToPlayer(superman);
+    addMovementAnimationToPlayer(batman, [9, 10, 11, 12, 13, 14, 15, 16, 17], [0, 1, 2, 3, 4, 5, 6, 7, 8], [13], [0]);
+    addMovementAnimationToPlayer(superman, [7, 8, 9, 10, 11, 12, 13], [0, 1, 2, 3, 4, 5, 6], [13], [0]);
 
-    superman.body.bounce.y = 0.2;
-    superman.body.gravity.y = 300;
-    superman.body.collideWorldBounds = true;
+    function addPhysicsToPlayer (player) {
+        game.physics.arcade.enable(player);
 
-    batman.animations.add('moveLeft', [9, 10, 11, 12, 13, 14, 15, 16, 17], 10, true);
-    batman.animations.add('moveRight', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
+        player.body.bounce.y = 0.2;
+        player.body.gravity.y = 300;
+        player.body.collideWorldBounds = true;
 
-    batman.animations.add('turnLeft', [13]);
-    batman.animations.add('turnRight', [0]);
+        player.body.acceleration.y = 280;
+    }
 
-    batman.body.acceleration.y = 280;
-
-    superman.animations.add('moveLeft', [7, 8, 9, 10, 11, 12, 13], 10, true);
-    superman.animations.add('moveRight', [0, 1, 2, 3, 4, 5, 6], 10, true);
-
-    superman.animations.add('turnLeft', [13]);
-    superman.animations.add('turnRight', [0]);
-
-    superman.body.acceleration.y = 280;
+    function addMovementAnimationToPlayer (player, leftMovementFrames, rightMovementFrames, turnLeftFrames, turnRightFrames) {
+        player.animations.add('moveLeft', leftMovementFrames, 10, true);
+        player.animations.add('moveRight', rightMovementFrames, 10, true);
+        player.animations.add('turnLeft', turnLeftFrames);
+        player.animations.add('turnRight', turnRightFrames);
+    }
 }
 
 function update() {
