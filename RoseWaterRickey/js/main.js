@@ -11,8 +11,8 @@
     function preload() {
         game.load.image('background', 'imgs/background.png');
         game.load.image('log', 'imgs/log.png');
-        game.load.spritesheet('batman', 'imgs/batmanSprite.png', 53, 58);
-        game.load.spritesheet('superman', 'imgs/supermanSprite.png', 53, 58);
+        game.load.spritesheet('batman', 'imgs/batmanSprite.png', 53, 48);
+        game.load.spritesheet('superman', 'imgs/supermanSprite.png', 53, 55);
     }
 
     function createGame() {
