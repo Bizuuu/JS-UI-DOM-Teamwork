@@ -34,6 +34,7 @@ function createGame() {
     sq.body.bounce.y = 0.2;
     sq.body.gravity.y = 300;
     sq.body.collideWorldBounds = true;
+    sq.body.acceleration.y = 280;
 
     sq.animations.add('moveLeft', [0, 1, 2, 3], 10, true);
     sq.animations.add('moveRight', [5, 6, 7, 8], 10, true);
