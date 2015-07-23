@@ -7,7 +7,29 @@ Game.JumpingLevel.prototype = (function () {
         log,
         players,
         cursorKeys,
-        wasdKeys;
+        wasdKeys,
+        music,
+        jump,
+        run;
+
+    function playFx(action) {
+
+        switch (action)
+        {
+            case 'jump':
+                jump.play();
+                break;
+
+            case 'run':
+                run.play();
+                break;
+        }
+
+    }
+
+    function restartMusic() {
+        music.restart();
+    }
 
     function initPlatforms (game) {
         platforms = game.add.group();
@@ -28,13 +50,16 @@ Game.JumpingLevel.prototype = (function () {
 
             if (player.body.touching.down) {
                 player.animations.play('moveLeft');
+                playFx('run');
             } else {
                 player.animations.play('turnLeft');
             }
         } else if (directionKeys.right.isDown) {
             player.body.velocity.x = 200;
+
             if (player.body.touching.down) {
                 player.animations.play('moveRight');
+                playFx('run');
             } else {
                 player.animations.play('turnRight');
             }
@@ -43,7 +68,9 @@ Game.JumpingLevel.prototype = (function () {
         }
 
         if (directionKeys.up.isDown && player.body.touching.down) {
+            playFx('jump');
             player.body.velocity.y = -350;
+
         }
     }
 
@@ -51,10 +78,18 @@ Game.JumpingLevel.prototype = (function () {
         preload: function(){
             this.load.image('background', 'imgs/background.png');
             this.load.image('log', 'imgs/log.png');
+            this.load.audio('levelMusic', ['audio/Batman - Sega Genesis - Stage 1.mp3']);
+            this.load.audio('jump', 'audio/jump.mp3');
+            this.load.audio('running', 'audio/Running.mp3');
             this.load.spritesheet('batman', 'imgs/batmanSprite.png', 53, 48);
             this.load.spritesheet('superman', 'imgs/supermanSprite.png', 53, 55);
         },
         create: function(){
+            music = this.add.audio('levelMusic');
+            music.play();
+            jump = this.add.audio('jump');
+            run = this.add.audio('running');
+
             this.add.sprite(0, 0, 'background');
 
             this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -78,6 +113,8 @@ Game.JumpingLevel.prototype = (function () {
                 .init(this.add.sprite(720, 0, 'superman'))
                 .addPhysics(this, 0.2, 300, 280)
                 .addAnimations([7, 8, 9, 10, 11, 12, 13], [0, 1, 2, 3, 4, 5, 6], 13, 0);
+
+            this.input.onDown.add(restartMusic, this);
         },
         update: function(){
             this.physics.arcade.collide(players.batman.sprite, platforms);
