@@ -1,6 +1,6 @@
 var Game = Game || {};
 
-Game.JumpingLevel = function(){};
+Game.JumpingLevel = function(game){};
 
 Game.JumpingLevel.prototype = (function () {
     var platforms,
@@ -31,8 +31,8 @@ Game.JumpingLevel.prototype = (function () {
         music.restart();
     }
 
-    function initPlatforms (game) {
-        platforms = game.add.group();
+    function initPlatforms () {
+        platforms = this.game.add.group();
         platforms.enableBody = true;
 
         for (var i = 0, len = platformsCoordinates.length, coords; i < len; i += 1) {
