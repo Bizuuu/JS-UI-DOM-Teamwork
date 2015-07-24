@@ -10,9 +10,10 @@ function preload() {
 
 function createGame() {
     game.state.add('Jumping', Game.JumpingLevel);
-    game.state.start('Jumping');
+    game.state.add('Menu', Game.Menu);
+    game.state.start('Menu');
 }
 
-function update() {
 
+function update(){
 }

@@ -76,49 +76,49 @@ Game.JumpingLevel.prototype = (function () {
 
     var jumpingLevel = {
         preload: function(){
-            this.load.image('background', 'imgs/background.png');
-            this.load.image('log', 'imgs/log.png');
-            this.load.audio('levelMusic', ['audio/Batman - Sega Genesis - Stage 1.mp3']);
-            this.load.audio('jump', 'audio/jump.mp3');
-            this.load.audio('running', 'audio/Running.mp3');
-            this.load.spritesheet('batman', 'imgs/batmanSprite.png', 53, 48);
-            this.load.spritesheet('superman', 'imgs/supermanSprite.png', 53, 55);
+            this.game.load.image('background', 'imgs/background.png');
+            this.game.load.image('log', 'imgs/log.png');
+            this.game.load.audio('levelMusic', ['audio/Batman - Sega Genesis - Stage 1.mp3']);
+            this.game.load.audio('jump', 'audio/jump.mp3');
+            this.game.load.audio('running', 'audio/Running.mp3');
+            this.game.load.spritesheet('batman', 'imgs/batmanSprite.png', 53, 48);
+            this.game.load.spritesheet('superman', 'imgs/supermanSprite.png', 53, 55);
         },
         create: function(){
-            music = this.add.audio('levelMusic');
+            music = this.game.add.audio('levelMusic');
             music.play();
-            jump = this.add.audio('jump');
-            run = this.add.audio('running');
+            jump = this.game.add.audio('jump');
+            run = this.game.add.audio('running');
 
-            this.add.sprite(0, 0, 'background');
+            this.game.add.sprite(0, 0, 'background');
 
-            this.physics.startSystem(Phaser.Physics.ARCADE);
+            this.game.physics.startSystem(Phaser.Physics.ARCADE);
             initPlatforms(this);
 
-            cursorKeys = this.input.keyboard.createCursorKeys();
+            cursorKeys = this.game.input.keyboard.createCursorKeys();
             wasdKeys = {
-                up: this.input.keyboard.addKey(Phaser.Keyboard.W),
-                down: this.input.keyboard.addKey(Phaser.Keyboard.S),
-                left: this.input.keyboard.addKey(Phaser.Keyboard.A),
-                right: this.input.keyboard.addKey(Phaser.Keyboard.D)
+                up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
+                down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
+                left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
+                right: this.game.input.keyboard.addKey(Phaser.Keyboard.D)
             };
 
             players = {};
             players.batman = Object.create(Player)
-                .init(this.add.sprite(20, 0, 'batman'))
+                .init(this.game.add.sprite(20, 0, 'batman'))
                 .addPhysics(this, 0.2, 300, 280)
                 .addAnimations([9, 10, 11, 12, 13, 14, 15, 16, 17], [0, 1, 2, 3, 4, 5, 6, 7, 8], 13, 0);
 
             players.superman = Object.create(Player)
-                .init(this.add.sprite(720, 0, 'superman'))
+                .init(this.game.add.sprite(720, 0, 'superman'))
                 .addPhysics(this, 0.2, 300, 280)
                 .addAnimations([7, 8, 9, 10, 11, 12, 13], [0, 1, 2, 3, 4, 5, 6], 13, 0);
 
-            this.input.onDown.add(restartMusic, this);
+            this.game.input.onDown.add(restartMusic, this);
         },
         update: function(){
-            this.physics.arcade.collide(players.batman.sprite, platforms);
-            this.physics.arcade.collide(players.superman.sprite, platforms);
+            this.game.physics.arcade.collide(players.batman.sprite, platforms);
+            this.game.physics.arcade.collide(players.superman.sprite, platforms);
 
             reactToInput(players.batman.sprite, wasdKeys);
             reactToInput(players.superman.sprite, cursorKeys);
