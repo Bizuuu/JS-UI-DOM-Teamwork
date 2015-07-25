@@ -1,11 +1,11 @@
-var Player = (function () {
+var Player = (function() {
     var player = {
-        init: function(sprite){
+        init: function(sprite) {
             this.sprite = sprite;
 
             return this;
         },
-        addPhysics: function(game, bounceY, gravityY, accelerationY){
+        addPhysics: function(game, bounceY, gravityY, accelerationY) {
             game.physics.arcade.enable(this.sprite);
             this.sprite.body.bounce.y = bounceY;
             this.sprite.body.gravity.y = gravityY;
@@ -14,21 +14,21 @@ var Player = (function () {
 
             return this;
         },
-        addAnimations: function(leftFrames, rightFrames, turnLeft, turnRight){
-            this.sprite.animations.add('moveLeft', leftFrames, 10, true);
-            this.sprite.animations.add('moveRight', rightFrames, 10, true);
-            this.sprite.animations.add('turnLeft', [turnLeft]);
-            this.sprite.animations.add('turnRight', [turnRight]);
+        addAnimations: function(leftFrames, rightFrames, jumpLeftFrames, jumpRightFrames) {
+            this.sprite.animations.add('moveLeft', leftFrames, 15, true);
+            this.sprite.animations.add('moveRight', rightFrames, 15, true);
+            this.sprite.animations.add('jumpLeft', jumpLeftFrames, 5, true);
+            this.sprite.animations.add('jumpRight', jumpRightFrames, 5, true);
 
             return this;
         },
-        get sprite(){
+        get sprite() {
             return this._sprite;
         },
-        set sprite(value){
+        set sprite(value) {
             this._sprite = value;
         }
     };
-    
+
     return player;
 }());
