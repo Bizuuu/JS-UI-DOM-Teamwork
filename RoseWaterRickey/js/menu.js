@@ -1,30 +1,36 @@
 var Game = Game || {};
 
-Game.Menu = function(game){};
+Game.Menu = function (game) {
+};
 
 Game.Menu.prototype = (function () {
+    var music;
     var menu = {
-        preload : function() {
+        preload: function () {
 
             this.game.load.image('menu', 'imgs/menuBackground.png');
             this.game.load.spritesheet('playButton', 'imgs/buttonSprite.png', 274, 143);
-            this.game.load.spritesheet('teamButton', 'imgs/teamButtonSprite.png', 118, 108 );
+            this.game.load.spritesheet('teamButton', 'imgs/teamButtonSprite.png', 118, 108);
             this.game.load.spritesheet('howToButton', 'imgs/howToSprite.png', 118, 110);
+            this.game.load.audio('menuMusic', ['audio/Soundtrack Batman vs Superman_ Dawn Of Justice (Theme Song) _ Musique du Film Batman v Superman.mp3']);
         },
         create: function () {
+            music = this.game.add.audio('menuMusic');
+            music.play();
             this.game.add.sprite(0, 0, 'menu');
             this.game.add.button(256, 318, 'playButton', this.startGame, this.game, 1, 0, 2);
             //this.add.button(this, 100, 425, 'teamButton', this.showTeam, this.game, 1, 0, 2);
             //this.add.button(this, 550, 440, 'howToButton', this.showGameInfo, this.game, 1, 0, 2);
 
         },
-        startGame: function(){
+        startGame: function () {
+            music.stop();
             this.state.start('Jumping');
         },
-        showTeam: function(){
+        showTeam: function () {
 
         },
-        showGameInfo: function(){
+        showGameInfo: function () {
 
         }
     };
