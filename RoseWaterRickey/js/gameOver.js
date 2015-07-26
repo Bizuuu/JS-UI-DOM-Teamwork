@@ -30,8 +30,6 @@ Game.GameOver.prototype = (function () {
         announceWinner: function () {
             this.add.sprite(winnerStampX, 150, 'winnerStamp');
             music.play();
-
-            //
         },
         returnToMenu: function(){
             this.state.start('Menu');

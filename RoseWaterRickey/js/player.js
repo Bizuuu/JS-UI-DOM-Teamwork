@@ -31,12 +31,13 @@ var Player = (function() {
             return this;
         },
         addBullet: function() {
+            var bullet;
             if (this.direction === CONST.direction.right) {
-                var bullet = game.add.sprite(this.sprite.x + this.sprite.width, this.sprite.y + 25, 'bullet');
+                bullet = game.add.sprite(this.sprite.x + this.sprite.width, this.sprite.y + 25, 'bullet');
                 game.physics.arcade.enable(bullet);
                 bullet.body.velocity.x = CONST.game.physics.bulletVelocity;
             } else {
-                var bullet = game.add.sprite(this.sprite.x, this.sprite.y + 25, 'bullet');
+                bullet = game.add.sprite(this.sprite.x, this.sprite.y + 25, 'bullet');
                 game.physics.arcade.enable(bullet);
                 bullet.body.velocity.x = -CONST.game.physics.bulletVelocity;
             }

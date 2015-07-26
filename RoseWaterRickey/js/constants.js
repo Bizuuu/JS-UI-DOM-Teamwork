@@ -1,7 +1,7 @@
 var CONST = {
     direction: {
         left: 'left',
-        right: 'right',
+        right: 'right'
     },
     player: {
         initialLives: 5
