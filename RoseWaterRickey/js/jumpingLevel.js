@@ -46,7 +46,7 @@ Game.JumpingLevel.prototype = (function () {
         player.body.velocity.x = 0;
 
         if (directionKeys.left.isDown) {
-            player.body.velocity.x = -200;
+            player.body.velocity.x = -CONST.game.physics.xVelocity;
 
             if (player.body.touching.down) {
                 player.animations.play('moveLeft');
@@ -55,7 +55,7 @@ Game.JumpingLevel.prototype = (function () {
                 player.animations.play('turnLeft');
             }
         } else if (directionKeys.right.isDown) {
-            player.body.velocity.x = 200;
+            player.body.velocity.x = CONST.game.physics.xVelocity;
 
             if (player.body.touching.down) {
                 player.animations.play('moveRight');
@@ -69,7 +69,7 @@ Game.JumpingLevel.prototype = (function () {
 
         if (directionKeys.up.isDown && player.body.touching.down) {
             playFx('jump');
-            player.body.velocity.y = -350;
+            player.body.velocity.y = -CONST.game.physics.yVelocity;
 
         }
     }
@@ -95,13 +95,8 @@ Game.JumpingLevel.prototype = (function () {
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
             initPlatforms(this);
 
-            cursorKeys = this.game.input.keyboard.createCursorKeys();
-            wasdKeys = {
-                up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
-                down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
-                left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
-                right: this.game.input.keyboard.addKey(Phaser.Keyboard.D)
-            };
+            cursorKeys = getCursorKeys(this.game);
+            wasdKeys = getWasdKeys(this.game);
 
             players = {};
             players.batman = Object.create(Player)

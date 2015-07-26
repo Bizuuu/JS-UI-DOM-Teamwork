@@ -1,4 +1,5 @@
 var Player = (function () {
+
     var player = {
         init: function(sprite){
             this.sprite = sprite;
