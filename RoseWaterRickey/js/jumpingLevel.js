@@ -10,7 +10,8 @@ Game.JumpingLevel.prototype = (function() {
         supermanKeys,
         music,
         jump,
-        run;
+        run,
+        bulletTime = 0;
 
     function playFx(action) {
 
@@ -78,7 +79,10 @@ Game.JumpingLevel.prototype = (function() {
     }
 
     function fireBullet(player) {
-        player.addBullet();
+        if (game.time.now > bulletTime) {
+            player.addBullet();
+            bulletTime = game.time.now + 500;
+        }
     }
 
     var jumpingLevel = {
