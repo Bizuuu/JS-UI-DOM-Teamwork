@@ -20,8 +20,36 @@ var Player = (function() {
             this.sprite.animations.add('jumpLeft', jumpLeftFrames, 5, true);
             this.sprite.animations.add('jumpRight', jumpRightFrames, 5, true);
 
+            this.framesWithLeftDirection = [];
+            for (var i = 0; i < leftFrames.length; i++) {
+                this.framesWithLeftDirection.push(leftFrames[i]);
+            }
+            for (var i = 0; i < jumpLeftFrames.length; i++) {
+                this.framesWithLeftDirection.push(jumpLeftFrames[i]);
+            }
 
             return this;
+        },
+        addBullet: function() {
+            if (this.direction === CONST.direction.right) {
+                var bullet = game.add.sprite(this.sprite.x + this.sprite.width, this.sprite.y + 25, 'bullet');
+                game.physics.arcade.enable(bullet);
+                bullet.body.velocity.x = CONST.game.physics.bulletVelocity;
+            } else {
+                var bullet = game.add.sprite(this.sprite.x, this.sprite.y + 25, 'bullet');
+                game.physics.arcade.enable(bullet);
+                bullet.body.velocity.x = -CONST.game.physics.bulletVelocity;
+            }
+        },
+        removeBullet: function() {
+
+        },
+        get direction() {
+            if (this.framesWithLeftDirection.indexOf(this.sprite.animations.frame) !== -1) {
+                return CONST.direction.left;
+            } else {
+                return CONST.direction.right;
+            }
         },
         get sprite() {
             return this._sprite;

@@ -14,7 +14,7 @@ function createGame() {
     game.state.add('Jumping', Game.JumpingLevel);
     game.state.add('Logic', Game.LogicLevel);
     game.state.add('Menu', Game.Menu);
-    game.state.start('Logic');
+    game.state.start('Jumping');
 }
 
 

@@ -6,8 +6,8 @@ Game.JumpingLevel.prototype = (function() {
     var platforms,
         log,
         players,
-        cursorKeys,
-        wasdKeys,
+        batmanKeys,
+        supermanKeys,
         music,
         jump,
         run;
@@ -42,35 +42,43 @@ Game.JumpingLevel.prototype = (function() {
     }
 
     function reactToInput(player, directionKeys) {
-        player.body.velocity.x = 0;
+        var sprite = player.sprite;
+        sprite.body.velocity.x = 0;
 
         if (directionKeys.left.isDown) {
-            player.body.velocity.x = -CONST.game.physics.xVelocity;
+            sprite.body.velocity.x = -CONST.game.physics.playerXVelocity;
 
-            if (player.body.touching.down) {
-                player.animations.play('moveLeft');
+            if (sprite.body.touching.down) {
+                sprite.animations.play('moveLeft');
                 playFx('run');
             } else {
-                player.animations.play('jumpLeft');
+                sprite.animations.play('jumpLeft');
             }
         } else if (directionKeys.right.isDown) {
-            player.body.velocity.x = CONST.game.physics.xVelocity;
+            sprite.body.velocity.x = CONST.game.physics.playerXVelocity;
 
-            if (player.body.touching.down) {
-                player.animations.play('moveRight');
+            if (sprite.body.touching.down) {
+                sprite.animations.play('moveRight');
                 playFx('run');
             } else {
-                player.animations.play('jumpRight');
+                sprite.animations.play('jumpRight');
             }
         } else {
-            player.animations.stop();
+            sprite.animations.stop();
         }
 
-        if (directionKeys.up.isDown && player.body.touching.down) {
+        if (directionKeys.fire.isDown) {
+            fireBullet(player);
+        }
+        if (directionKeys.up.isDown && sprite.body.touching.down) {
             playFx('jump');
-            player.body.velocity.y = -CONST.game.physics.yVelocity;
-
+            sprite.body.velocity.y = -CONST.game.physics.playerYVelocity;
         }
+
+    }
+
+    function fireBullet(player) {
+        player.addBullet();
     }
 
     var jumpingLevel = {
@@ -82,6 +90,7 @@ Game.JumpingLevel.prototype = (function() {
             this.game.load.audio('running', 'audio/running.mp3');
             this.game.load.spritesheet('batman', 'imgs/batmanSprite.png', 53, 48);
             this.game.load.spritesheet('superman', 'imgs/supermanSprite.png', 53, 55);
+            this.game.load.spritesheet('bullet', 'imgs/EnemyBullet.png', 60, 60);
         },
         create: function() {
             music = this.game.add.audio('levelMusic');
@@ -94,17 +103,17 @@ Game.JumpingLevel.prototype = (function() {
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
             initPlatforms(this);
 
-            cursorKeys = getCursorKeys(this.game);
-            wasdKeys = getWasdKeys(this.game);
+            batmanKeys = getBatmanKeys(this.game);
+            supermanKeys = getSupermanKeys(this.game);
 
             players = {};
             players.batman = Object.create(Player)
-                .init(this.game.add.sprite(20, 0, 'batman'))
+                .init(this.game.add.sprite(20, 0, 'batman', 0))
                 .addPhysics(this, 0.2, 300, 280)
                 .addAnimations([9, 10, 11, 12, 13, 14, 15, 16, 17], [0, 1, 2, 3, 4, 5, 6, 7, 8], [24, 25, 26, 27, 28, 29], [18, 19, 20, 21, 22, 23]);
 
             players.superman = Object.create(Player)
-                .init(this.game.add.sprite(720, 0, 'superman'))
+                .init(this.game.add.sprite(720, 12, 'superman', 12))
                 .addPhysics(this, 0.2, 300, 280)
                 .addAnimations([7, 8, 9, 10, 11, 12, 13], [0, 1, 2, 3, 4, 5, 6], [20, 21, 22, 23, 24, 25], [14, 15, 16, 17, 18, 19]);
 
@@ -114,8 +123,8 @@ Game.JumpingLevel.prototype = (function() {
             this.game.physics.arcade.collide(players.batman.sprite, platforms);
             this.game.physics.arcade.collide(players.superman.sprite, platforms);
 
-            reactToInput(players.batman.sprite, wasdKeys);
-            reactToInput(players.superman.sprite, cursorKeys);
+            reactToInput(players.batman, supermanKeys);
+            reactToInput(players.superman, batmanKeys);
         }
     };
 

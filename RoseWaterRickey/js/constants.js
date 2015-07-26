@@ -1,4 +1,8 @@
 var CONST = {
+    direction: {
+        left: 'left',
+        right: 'right',
+    },
     player: {
         initialLives: 5
     },
@@ -8,9 +12,10 @@ var CONST = {
             height: 600
         },
         physics: {
-            xVelocity: 200,
-            yVelocity: 350,
-            p2Gravity: 200
+            playerXVelocity: 200,
+            playerYVelocity: 350,
+            p2Gravity: 200,
+            bulletVelocity: 50
         }
     }
 };

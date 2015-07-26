@@ -4,7 +4,7 @@ Game.LogicLevel = function(game){};
 
 Game.LogicLevel.prototype = (function () {
 
-var platform, platformCG, cubesCG, cube, pointer, cursorKeys, wasdKeys, canCreate = true, cube, lastCubeCoord = {x: -1, y: -1};
+var platform, platformCG, cubesCG, cube, pointer, batmanKeys, supermanKeys, canCreate = true, cube, lastCubeCoord = {x: -1, y: -1};
 
     function createCube (x) {
         cube = game.add.sprite(x, 0, 'cube');
@@ -21,15 +21,15 @@ var platform, platformCG, cubesCG, cube, pointer, cursorKeys, wasdKeys, canCreat
     function moveTriangle () {
         pointer.body.setZeroVelocity();
 
-        if (cursorKeys.left.isDown ||wasdKeys.left.isDown) {
+        if (batmanKeys.left.isDown ||supermanKeys.left.isDown) {
             if(pointer.body.x - pointer.width/2 > 0)
             pointer.body.velocity.x = -CONST.game.physics.xVelocity;
-        } else if (cursorKeys.right.isDown ||wasdKeys.right.isDown) {
+        } else if (batmanKeys.right.isDown ||supermanKeys.right.isDown) {
             if(pointer.body.x + pointer.width/2 < CONST.game.world.width)
             pointer.body.velocity.x = CONST.game.physics.xVelocity;
         }
 
-        if (cursorKeys.down.isDown ||wasdKeys.down.isDown) {
+        if (batmanKeys.down.isDown ||supermanKeys.down.isDown) {
             if(canCreate)
             createCube(pointer.body.x);
         }
@@ -48,8 +48,8 @@ var platform, platformCG, cubesCG, cube, pointer, cursorKeys, wasdKeys, canCreat
             this.game.physics.startSystem(Phaser.Physics.P2JS);
             this. game.physics.p2.gravity.y = CONST.game.physics.p2Gravity;
 
-            cursorKeys = getCursorKeys(this.game);
-            wasdKeys = getWasdKeys(this.game);
+            batmanKeys = getBatmanKeys(this.game);
+            supermanKeys = getSupermanKeys(this.game);
 
 
             this.game.add.sprite(0, 0, 'background');
