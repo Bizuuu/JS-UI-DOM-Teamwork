@@ -2,7 +2,6 @@ var Player = (function() {
     var player = {
         init: function(sprite) {
             this.sprite = sprite;
-
             return this;
         },
         addPhysics: function(game, bounceY, gravityY, accelerationY) {
@@ -41,9 +40,15 @@ var Player = (function() {
                 game.physics.arcade.enable(bullet);
                 bullet.body.velocity.x = -CONST.game.physics.bulletVelocity;
             }
-        },
-        removeBullet: function() {
 
+            this.bullets.push(bullet);
+        },
+        removeBullet: function(bullet) {
+            this.bullets.splice(this.bullets.indexOf(bullet), 1);
+        },
+        get bullets() {
+            this._bullets = this._bullets || [];
+            return this._bullets;
         },
         get direction() {
             if (this.framesWithLeftDirection.indexOf(this.sprite.animations.frame) !== -1) {

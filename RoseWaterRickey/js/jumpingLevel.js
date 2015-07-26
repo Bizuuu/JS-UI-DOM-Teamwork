@@ -84,7 +84,12 @@ Game.JumpingLevel.prototype = (function() {
             bulletTime = game.time.now + 500;
         }
     }
-
+    function updatePlayerBullets(player) {
+        game.physics.arcade.overlap(platforms, player.bullets, function(bullet, platforms) {
+                bullet.kill();
+                player.removeBullet(bullet);
+            }, null, this);
+    }
     var jumpingLevel = {
         preload: function() {
             this.game.load.image('background', 'imgs/background.png');
@@ -126,7 +131,8 @@ Game.JumpingLevel.prototype = (function() {
         update: function() {
             this.game.physics.arcade.collide(players.batman.sprite, platforms);
             this.game.physics.arcade.collide(players.superman.sprite, platforms);
-
+            updatePlayerBullets(players.batman);
+            updatePlayerBullets(players.superman);
             reactToInput(players.batman, supermanKeys);
             reactToInput(players.superman, batmanKeys);
         }
