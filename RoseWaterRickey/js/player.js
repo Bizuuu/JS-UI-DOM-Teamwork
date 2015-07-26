@@ -47,9 +47,8 @@ var Player = (function() {
         get direction() {
             if (this.framesWithLeftDirection.indexOf(this.sprite.animations.frame) !== -1) {
                 return CONST.direction.left;
-            } else {
-                return CONST.direction.right;
             }
+            return CONST.direction.right;
         },
         get sprite() {
             return this._sprite;

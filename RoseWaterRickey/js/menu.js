@@ -1,7 +1,6 @@
 var Game = Game || {};
 
-Game.Menu = function (game) {
-};
+Game.Menu = function (game) {};
 
 Game.Menu.prototype = (function () {
     var music;
