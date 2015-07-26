@@ -77,9 +77,9 @@ Game.JumpingLevel.prototype = (function() {
         preload: function() {
             this.game.load.image('background', 'imgs/background.png');
             this.game.load.image('log', 'imgs/log.png');
-            this.game.load.audio('levelMusic', ['audio/Batman - Sega Genesis - Stage 1.mp3']);
+            this.game.load.audio('levelMusic', ['audio/jumpingLevelTheme.mp3']);
             this.game.load.audio('jump', 'audio/jump.mp3');
-            this.game.load.audio('running', 'audio/Running.mp3');
+            this.game.load.audio('running', 'audio/running.mp3');
             this.game.load.spritesheet('batman', 'imgs/batmanSprite.png', 53, 48);
             this.game.load.spritesheet('superman', 'imgs/supermanSprite.png', 53, 55);
         },

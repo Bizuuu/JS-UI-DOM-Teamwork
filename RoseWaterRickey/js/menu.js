@@ -12,7 +12,7 @@ Game.Menu.prototype = (function () {
             this.game.load.spritesheet('playButton', 'imgs/buttonSprite.png', 274, 143);
             this.game.load.spritesheet('teamButton', 'imgs/teamButtonSprite.png', 118, 108);
             this.game.load.spritesheet('howToButton', 'imgs/howToSprite.png', 118, 110);
-            this.game.load.audio('menuMusic', ['audio/Soundtrack Batman vs Superman_ Dawn Of Justice (Theme Song) _ Musique du Film Batman v Superman.mp3']);
+            this.game.load.audio('menuMusic', ['audio/mainTheme.mp3']);
         },
         create: function () {
             music = this.game.add.audio('menuMusic');
