@@ -95,11 +95,11 @@ Game.JumpingLevel.prototype = (function () {
     // Do endgame relates stuff / change level?
     function checkForWinner() {
         if (stats.batman.jumping.lives <= 0) {
-            game.paused = true; // Debug
+            // game.paused = true; // Debug
         }
 
         if (stats.superman.jumping.lives <= 0) {
-            game.paused = true; // Debug
+            // game.paused = true; // Debug
         }
     }
 
