@@ -1,6 +1,6 @@
 var Game = Game || {};
 
-Game.GameOver = function (game) {};
+Game.GameOver = function (game) { };
 
 Game.GameOver.prototype = (function () {
     var music,
@@ -17,8 +17,7 @@ Game.GameOver.prototype = (function () {
             this.game.add.sprite(0, 0, 'background');
             music = this.game.add.audio('stamp');
 
-
-            if(stats.batman.total < stats.superman.total){
+            if (stats.batman.total < stats.superman.total) {
                 winnerStampX = 520;
             } else {
                 winnerStampX = 50;
@@ -31,10 +30,10 @@ Game.GameOver.prototype = (function () {
             this.add.sprite(winnerStampX, 150, 'winnerStamp');
             music.play();
         },
-        returnToMenu: function(){
+        returnToMenu: function () {
             this.state.start('Menu');
         }
     };
 
     return gameOver;
-}());
+} ());

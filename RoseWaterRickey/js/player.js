@@ -1,10 +1,10 @@
-var Player = (function() {
+var Player = (function () {
     var player = {
-        init: function(sprite) {
+        init: function (sprite) {
             this.sprite = sprite;
             return this;
         },
-        addPhysics: function(game, bounceY, gravityY, accelerationY) {
+        addPhysics: function (game, bounceY, gravityY, accelerationY) {
             game.physics.arcade.enable(this.sprite);
             this.sprite.body.bounce.y = bounceY;
             this.sprite.body.gravity.y = gravityY;
@@ -13,7 +13,7 @@ var Player = (function() {
 
             return this;
         },
-        addAnimations: function(leftFrames, rightFrames, jumpLeftFrames, jumpRightFrames) {
+        addAnimations: function (leftFrames, rightFrames, jumpLeftFrames, jumpRightFrames) {
             this.sprite.animations.add('moveLeft', leftFrames, 15, true);
             this.sprite.animations.add('moveRight', rightFrames, 15, true);
             this.sprite.animations.add('jumpLeft', jumpLeftFrames, 5, true);
@@ -29,7 +29,7 @@ var Player = (function() {
 
             return this;
         },
-        addBullet: function() {
+        addBullet: function () {
             var bullet;
             if (this.direction === CONST.direction.right) {
                 bullet = game.add.sprite(this.sprite.x + this.sprite.width, this.sprite.y + 25, 'bullet');
@@ -43,7 +43,7 @@ var Player = (function() {
 
             this.bullets.push(bullet);
         },
-        removeBullet: function(bullet) {
+        removeBullet: function (bullet) {
             this.bullets.splice(this.bullets.indexOf(bullet), 1);
         },
         get bullets() {
@@ -65,4 +65,4 @@ var Player = (function() {
     };
 
     return player;
-}());
+} ());

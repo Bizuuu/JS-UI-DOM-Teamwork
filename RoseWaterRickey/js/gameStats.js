@@ -8,7 +8,7 @@ var stats = {
             score: 0,
             lives: CONST.player.initialLives
         },
-        get total(){
+        get total() {
             return this.logic.score + this.jumping.score;
         }
     },
@@ -21,7 +21,7 @@ var stats = {
             score: 0,
             lives: CONST.player.initialLives
         },
-        get total(){
+        get total() {
             return this.logic.score + this.jumping.score;
         }
     }
