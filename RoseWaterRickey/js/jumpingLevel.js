@@ -1,8 +1,8 @@
 var Game = Game || {};
 
-Game.JumpingLevel = function(game) {};
+Game.JumpingLevel = function (game) { };
 
-Game.JumpingLevel.prototype = (function() {
+Game.JumpingLevel.prototype = (function () {
     var platforms,
         log,
         players,
@@ -71,27 +71,29 @@ Game.JumpingLevel.prototype = (function() {
         if (directionKeys.fire.isDown) {
             fireBullet(player);
         }
+        
         if (directionKeys.up.isDown && sprite.body.touching.down) {
             playFx('jump');
             sprite.body.velocity.y = -CONST.game.physics.playerYVelocity;
         }
-
     }
 
     function fireBullet(player) {
         if (game.time.now > bulletTime) {
             player.addBullet();
-            bulletTime = game.time.now + 500;
+            bulletTime = game.time.now + 250;
         }
     }
+
     function updatePlayerBullets(player) {
-        game.physics.arcade.overlap(platforms, player.bullets, function(bullet, platforms) {
-                bullet.kill();
-                player.removeBullet(bullet);
-            }, null, this);
+        game.physics.arcade.overlap(platforms, player.bullets, function (bullet, platforms) {
+            bullet.kill();
+            player.removeBullet(bullet);
+        }, null, this);
     }
+
     var jumpingLevel = {
-        preload: function() {
+        preload: function () {
             this.game.load.image('background', 'imgs/background.png');
             this.game.load.image('log', 'imgs/log.png');
             this.game.load.audio('levelMusic', ['audio/jumpingLevelTheme.mp3']);
@@ -101,7 +103,7 @@ Game.JumpingLevel.prototype = (function() {
             this.game.load.spritesheet('superman', 'imgs/supermanSprite.png', 53, 55);
             this.game.load.spritesheet('bullet', 'imgs/EnemyBullet.png', 60, 60);
         },
-        create: function() {
+        create: function () {
             music = this.game.add.audio('levelMusic');
             music.play();
             jump = this.game.add.audio('jump');
@@ -115,7 +117,8 @@ Game.JumpingLevel.prototype = (function() {
             batmanKeys = getBatmanKeys(this.game);
             supermanKeys = getSupermanKeys(this.game);
 
-            players = {};
+            players = this.game.add.group();
+            players.enableBody = true;
             players.batman = Object.create(Player)
                 .init(this.game.add.sprite(20, 0, 'batman', 0))
                 .addPhysics(this, 0.2, 300, 280)
@@ -128,15 +131,35 @@ Game.JumpingLevel.prototype = (function() {
 
             this.game.input.onDown.add(restartMusic, this);
         },
-        update: function() {
+        update: function () {
             this.game.physics.arcade.collide(players.batman.sprite, platforms);
             this.game.physics.arcade.collide(players.superman.sprite, platforms);
+
+            var maxBullets = Math.max(players.superman.bullets.length, players.batman.bullets.length);
+            for (var index = 0; index < maxBullets; index += 1) {
+                this.game.physics.arcade.collide(players.batman.sprite, players.superman.bullets[index], batmanBulletHandler, null, this);
+                this.game.physics.arcade.collide(players.superman.sprite, players.batman.bullets[index], supermanBulletHandler, null, this);
+            }
+
+            function batmanBulletHandler(playerSprite, bullet) {
+                bullet.kill();
+                stats.superman.jumping.score += 20;
+                stats.batman.jumping.lives -= 1;
+            }
+
+            function supermanBulletHandler(playerSprite, bullet) {
+                bullet.kill();
+                stats.batman.jumping.score += 20;
+                stats.superman.jumping.lives -= 1;
+            }
+
             updatePlayerBullets(players.batman);
             updatePlayerBullets(players.superman);
+
             reactToInput(players.batman, supermanKeys);
             reactToInput(players.superman, batmanKeys);
         }
     };
 
     return jumpingLevel;
-}());
+} ());

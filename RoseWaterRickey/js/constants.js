@@ -15,7 +15,7 @@ var CONST = {
             playerXVelocity: 200,
             playerYVelocity: 350,
             p2Gravity: 200,
-            bulletVelocity: 50
+            bulletVelocity: 200
         }
     }
 };
