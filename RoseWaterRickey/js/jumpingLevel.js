@@ -12,7 +12,8 @@ Game.JumpingLevel.prototype = (function() {
         jump,
         run,
         bulletTime = 0,
-        healthBars;
+        healthBars,
+        playerCollisionTime = 0;
 
     function playFx(action) {
 
@@ -93,10 +94,9 @@ Game.JumpingLevel.prototype = (function() {
         }, null, this);
     }
 
-    // Do endgame relates stuff / change level?
     function checkForWinner() {
         if (players.batman.health <= 0 || players.superman.health <= 0) {
-            game.paused = true;
+            game.state.start('GameOver');
         }
     }
 
@@ -106,6 +106,49 @@ Game.JumpingLevel.prototype = (function() {
         stats[attackingPlayer].jumping.score += 20;
         players[shotPlayer].health -= 20;
         healthBars[shotPlayer].setHealth(players[shotPlayer].health / CONST.player.maxHealth);
+    }
+
+    function playersCollisionHandler() {
+        var jumpingPlayer, attackedPlayer;
+        var batmanY = players.batman.sprite.y;
+        var supermanY = players.superman.sprite.y;
+        if (batmanY === supermanY + players.superman.sprite.height) {
+            jumpingPlayer = players.superman;
+            attackedPlayer = players.batman;
+        } else if (supermanY === batmanY + players.batman.sprite.height) {
+            jumpingPlayer = players.batman;
+            attackedPlayer = players.superman;
+        } else {
+            return;
+        }
+
+        var jumpingPlayerToString = jumpingPlayer === players.batman ? 'batman' : 'superman';
+        var attackedPlayerToString = attackedPlayer === players.batman ? 'batman' : 'superman';
+        if (game.time.now > playerCollisionTime) {
+            stats[jumpingPlayerToString].jumping.score += 40;
+            players[attackedPlayerToString].health -= 40;
+            healthBars[attackedPlayerToString].setHealth(players[attackedPlayerToString].health / CONST.player.maxHealth);
+            playerCollisionTime = game.time.now + 500;
+        }
+    }
+
+    function detectCollisionsWithBullets() {
+        var maxBullets = Math.max(players.superman.bullets.length, players.batman.bullets.length);
+        for (var index = 0; index < maxBullets; index += 1) {
+            // TODO: Add collision sounds
+            this.game.physics.arcade.collide(players.batman.sprite, players.superman.bullets[index], function(batmanSprite, bullet) {
+                playerAndBulletCollisionHandler('superman', 'batman', batmanSprite, bullet);
+            });
+            this.game.physics.arcade.collide(players.superman.sprite, players.batman.bullets[index], function(supermanSprite, bullet) {
+                playerAndBulletCollisionHandler('batman', 'superman', supermanSprite, bullet);
+            });
+        }
+        updatePlayerBullets(players.batman);
+        updatePlayerBullets(players.superman);
+    }
+
+    function detectCollisionWithOtherPlayer() {
+        this.game.physics.arcade.collide(players.batman.sprite, players.superman.sprite, playersCollisionHandler);
     }
 
     var jumpingLevel = {
@@ -157,19 +200,8 @@ Game.JumpingLevel.prototype = (function() {
             this.game.physics.arcade.collide(players.batman.sprite, platforms);
             this.game.physics.arcade.collide(players.superman.sprite, platforms);
 
-            var maxBullets = Math.max(players.superman.bullets.length, players.batman.bullets.length);
-            for (var index = 0; index < maxBullets; index += 1) {
-                // TODO: Add collision sounds
-                this.game.physics.arcade.collide(players.batman.sprite, players.superman.bullets[index], function(batmanSprite, bullet) {
-                    playerAndBulletCollisionHandler('superman', 'batman', batmanSprite, bullet);
-                }, null, this);
-                this.game.physics.arcade.collide(players.superman.sprite, players.batman.bullets[index], function(supermanSprite, bullet) {
-                    playerAndBulletCollisionHandler('batman', 'superman', supermanSprite, bullet);
-                }, null, this);
-            }
-
-            updatePlayerBullets(players.batman);
-            updatePlayerBullets(players.superman);
+            detectCollisionsWithBullets();
+            detectCollisionWithOtherPlayer();
 
             checkForWinner();
 

@@ -7,7 +7,6 @@ var Player = (function() {
             },
             addPhysics: function(game, bounceY, gravityY, accelerationY) {
                 game.physics.arcade.enable(this.sprite);
-                this.sprite.body.bounce.y = bounceY;
                 this.sprite.body.gravity.y = gravityY;
                 this.sprite.body.acceleration.y = accelerationY;
                 this.sprite.body.collideWorldBounds = true;
