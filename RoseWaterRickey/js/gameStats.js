@@ -2,7 +2,6 @@ var stats = {
     batman: {
         jumping: {
             score: 0,
-            lives: CONST.player.initialLives
         },
         logic: {
             score: 0,
@@ -15,7 +14,6 @@ var stats = {
     superman: {
         jumping: {
             score: 0,
-            lives: CONST.player.initialLives
         },
         logic: {
             score: 0,

@@ -1,8 +1,8 @@
 var Game = Game || {};
 
-Game.JumpingLevel = function (game) { };
+Game.JumpingLevel = function(game) {};
 
-Game.JumpingLevel.prototype = (function () {
+Game.JumpingLevel.prototype = (function() {
     var platforms,
         log,
         players,
@@ -11,7 +11,8 @@ Game.JumpingLevel.prototype = (function () {
         music,
         jump,
         run,
-        bulletTime = 0;
+        bulletTime = 0,
+        healthBars;
 
     function playFx(action) {
 
@@ -86,42 +87,52 @@ Game.JumpingLevel.prototype = (function () {
     }
 
     function updatePlayerBullets(player) {
-        game.physics.arcade.overlap(platforms, player.bullets, function (bullet, platforms) {
+        game.physics.arcade.overlap(platforms, player.bullets, function(bullet, platforms) {
             bullet.kill();
             player.removeBullet(bullet);
         }, null, this);
     }
-    
+
     // Do endgame relates stuff / change level?
     function checkForWinner() {
-        if (stats.batman.jumping.lives <= 0) {
-            // game.paused = true; // Debug
-        }
-
-        if (stats.superman.jumping.lives <= 0) {
-            // game.paused = true; // Debug
+        if (stats.batman.jumping.health <= 0 || stats.superman.jumping.health <= 0) {
+            game.paused = true;
         }
     }
 
+    function playerAndBulletCollisionHandler(attackingPlayer, shotPlayer, playerSprite, bullet) {
+        bullet.kill();
+        players[attackingPlayer].removeBullet(bullet);
+        stats[attackingPlayer].jumping.score += 20;
+        players[shotPlayer].health -= 20;
+        healthBars[shotPlayer].setHealth(players[shotPlayer].health / CONST.player.maxHealth);
+    }
+
     var jumpingLevel = {
-        preload: function () {
+        preload: function() {
             this.game.load.image('background', 'imgs/background.png');
             this.game.load.image('log', 'imgs/log.png');
+            this.game.load.image('greenTexture', 'imgs/greenTexture.png');
+            this.game.load.image('redTexture', 'imgs/redTexture.png');
             this.game.load.audio('levelMusic', ['audio/jumpingLevelTheme.mp3']);
             this.game.load.audio('jump', 'audio/jump.mp3');
             this.game.load.audio('running', 'audio/running.mp3');
             this.game.load.spritesheet('batman', 'imgs/batmanSprite.png', 53, 48);
             this.game.load.spritesheet('superman', 'imgs/supermanSprite.png', 53, 55);
             this.game.load.spritesheet('bullet', 'imgs/EnemyBullet.png', 60, 60);
+
         },
-        create: function () {
+        create: function() {
             music = this.game.add.audio('levelMusic');
             music.play();
             jump = this.game.add.audio('jump');
             run = this.game.add.audio('running');
 
             this.game.add.sprite(0, 0, 'background');
-
+            healthBars = {
+                batman: new HealthBar(20, 20, game),
+                superman: new HealthBar(540, 20, game),
+            };
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
             initPlatforms(this);
 
@@ -142,29 +153,19 @@ Game.JumpingLevel.prototype = (function () {
 
             this.game.input.onDown.add(restartMusic, this);
         },
-        update: function () {
+        update: function() {
             this.game.physics.arcade.collide(players.batman.sprite, platforms);
             this.game.physics.arcade.collide(players.superman.sprite, platforms);
 
             var maxBullets = Math.max(players.superman.bullets.length, players.batman.bullets.length);
             for (var index = 0; index < maxBullets; index += 1) {
                 // TODO: Add collision sounds
-                this.game.physics.arcade.collide(players.batman.sprite, players.superman.bullets[index], batmanBulletHandler, null, this);
-                this.game.physics.arcade.collide(players.superman.sprite, players.batman.bullets[index], supermanBulletHandler, null, this);
-            }
-
-            function batmanBulletHandler(playerSprite, bullet) {
-                bullet.kill();
-                players.superman.removeBullet(bullet);
-                stats.superman.jumping.score += 20;
-                stats.batman.jumping.lives -= 1;
-            }
-
-            function supermanBulletHandler(playerSprite, bullet) {
-                bullet.kill();
-                players.batman.removeBullet(bullet);
-                stats.batman.jumping.score += 20;
-                stats.superman.jumping.lives -= 1;
+                this.game.physics.arcade.collide(players.batman.sprite, players.superman.bullets[index], function(batmanSprite, bullet) {
+                    playerAndBulletCollisionHandler('superman', 'batman', batmanSprite, bullet);
+                }, null, this);
+                this.game.physics.arcade.collide(players.superman.sprite, players.batman.bullets[index], function(supermanSprite, bullet) {
+                    playerAndBulletCollisionHandler('batman', 'superman', supermanSprite, bullet);
+                }, null, this);
             }
 
             updatePlayerBullets(players.batman);
@@ -178,4 +179,4 @@ Game.JumpingLevel.prototype = (function () {
     };
 
     return jumpingLevel;
-} ());
+}());

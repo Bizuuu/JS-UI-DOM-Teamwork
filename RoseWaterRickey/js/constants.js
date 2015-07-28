@@ -4,7 +4,8 @@ var CONST = {
         right: 'right'
     },
     player: {
-        initialLives: 5
+        initialLives: 5,
+        maxHealth: 240,
     },
     game: {
         world: {
