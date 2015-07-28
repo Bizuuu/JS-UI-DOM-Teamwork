@@ -17,9 +17,17 @@ function createGame() {
 }
 
 function update(){
-	var pauseText;
+    /*
+
+    Needs a lot of refactoring.
+
+
+	 var pauseText;
 	game.paused = false;
 	
+
+
+
     window.onkeydown = function () {
         if (game.input.keyboard.event.keyCode == 80) { //button "P"
             if (!game.paused) {
@@ -32,4 +40,5 @@ function update(){
             }
         }
     }
+    */
 }

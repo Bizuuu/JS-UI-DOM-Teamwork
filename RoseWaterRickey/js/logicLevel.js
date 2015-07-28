@@ -42,7 +42,7 @@ var platform, block, platformCollisionGroup, blocksCollisionGroup,
                     canCreateBlock = true;
                     canUpdateResult = false;
 
-                    //console.log(player + '       score:' + stats[player].logic.score +'         lives:'+ stats[player].logic.lives);
+                        console.log(player + '       score:' + stats[player].logic.score +'         lives:'+ stats[player].logic.lives);
                     switchPlayer();
                 }
             }
@@ -82,7 +82,7 @@ var platform, block, platformCollisionGroup, blocksCollisionGroup,
             }
         }
 
-        if (directionKeys.down.isDown) {
+        if (directionKeys.fire.isDown) {
             if(canCreateBlock) {
                 createCube(pointer.body.x);
             }
