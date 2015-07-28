@@ -95,7 +95,7 @@ Game.JumpingLevel.prototype = (function() {
 
     // Do endgame relates stuff / change level?
     function checkForWinner() {
-        if (stats.batman.jumping.health <= 0 || stats.superman.jumping.health <= 0) {
+        if (players.batman.health <= 0 || players.superman.health <= 0) {
             game.paused = true;
         }
     }
