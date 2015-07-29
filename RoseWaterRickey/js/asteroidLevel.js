@@ -2,6 +2,7 @@ var Game = Game || {};
 
 Game.AsteroidLevel = function (game) { };
 
+/* globals HealthBar, Phaser, getBatmanKeys, getSupermanKeys */
 Game.AsteroidLevel.prototype = (function () {
     var platforms,
         log,
@@ -11,12 +12,12 @@ Game.AsteroidLevel.prototype = (function () {
         music,
         jump,
         run,
-        bulletTime = 0,
+        asteroids,
         healthBars,
-        playerCollisionTime = 0;
+        playerCollisionTime = 0,
+        asteroidTime = 0;
 
     function playFx(action) {
-
         switch (action) {
             case 'jump':
                 jump.play();
@@ -26,7 +27,6 @@ Game.AsteroidLevel.prototype = (function () {
                 run.play();
                 break;
         }
-
     }
 
     function restartMusic() {
@@ -37,8 +37,20 @@ Game.AsteroidLevel.prototype = (function () {
         platforms = this.game.add.group();
         platforms.enableBody = true;
         log = platforms.create(0, game.world.height - 10, 'log');
-        log.scale.setTo(15, 1);
+        log.scale.setTo(15, 0);
         log.body.immovable = true;
+    }
+
+    function createAsteroid(asteroids) {
+        var asteroid = asteroids.create(game.world.randomX, 0, 'bullet');
+        asteroid.body.velocity.y = 100;
+    }
+    
+    function generateAsteroids(asteroids) {
+        if (game.time.now > asteroidTime) {
+            createAsteroid(asteroids)
+            asteroidTime = game.time.now + 500;
+        }
     }
 
     function reactToInput(player, directionKeys) {
@@ -71,13 +83,6 @@ Game.AsteroidLevel.prototype = (function () {
             playFx('jump');
             sprite.body.velocity.y = -CONST.game.physics.playerYVelocity;
         }
-    }
-
-    function updatePlayerBullets(player) {
-        game.physics.arcade.overlap(platforms, player.bullets, function (bullet, platforms) {
-            bullet.kill();
-            player.removeBullet(bullet);
-        }, null, this);
     }
 
     function checkForWinner() {
@@ -116,7 +121,7 @@ Game.AsteroidLevel.prototype = (function () {
 
     var asteroidLevel = {
         preload: function () {
-            this.game.load.image('background', 'imgs/asteroidsBackground.jpg');
+            this.game.load.image('background', 'imgs/background.png');
             this.game.load.image('log', 'imgs/log.png');
             this.game.load.image('greenTexture', 'imgs/greenTexture.png');
             this.game.load.image('redTexture', 'imgs/redTexture.png');
@@ -129,24 +134,22 @@ Game.AsteroidLevel.prototype = (function () {
 
         },
         create: function () {
-            music = this.game.add.audio('levelMusic');
-            music.play();
-            jump = this.game.add.audio('jump');
-            run = this.game.add.audio('running');
-
+            this.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.game.add.sprite(0, 0, 'background');
             healthBars = {
                 batman: new HealthBar(20, 20, game),
                 superman: new HealthBar(540, 20, game),
             };
-            this.game.physics.startSystem(Phaser.Physics.ARCADE);
-            initPlatform(this);
 
-            batmanKeys = getBatmanKeys(this.game);
-            supermanKeys = getSupermanKeys(this.game);
-
+            music = this.game.add.audio('levelMusic');
+            jump = this.game.add.audio('jump');
+            run = this.game.add.audio('running');
+            
+            asteroids = this.game.add.group();
             players = this.game.add.group();
+            asteroids.enableBody = true;
             players.enableBody = true;
+            
             players.batman = Object.create(Player)
                 .init(this.game.add.sprite(20, 0, 'batman', 0))
                 .addPhysics(this, 0.2, 300, 280)
@@ -156,14 +159,19 @@ Game.AsteroidLevel.prototype = (function () {
                 .init(this.game.add.sprite(720, 12, 'superman', 12))
                 .addPhysics(this, 0.2, 300, 280)
                 .addAnimations([7, 8, 9, 10, 11, 12, 13], [0, 1, 2, 3, 4, 5, 6], [20, 21, 22, 23, 24, 25], [14, 15, 16, 17, 18, 19]);
-
-            this.game.input.onDown.add(restartMusic, this);
+            
+            batmanKeys = getBatmanKeys(this.game);
+            supermanKeys = getSupermanKeys(this.game);
+            
+            initPlatform();
+            music.play();
         },
         update: function () {
             this.game.physics.arcade.collide(players.batman.sprite, platforms);
             this.game.physics.arcade.collide(players.superman.sprite, platforms);
 
             detectCollisionWithOtherPlayer();
+            generateAsteroids(asteroids);
             checkForWinner();
 
             reactToInput(players.batman, supermanKeys);

@@ -1,36 +1,36 @@
 var Game = Game || {};
 
-Game.LogicLevel = function(game){};
+Game.LogicLevel = function (game) { };
 
 Game.LogicLevel.prototype = (function () {
 
-var platform, block, platformCollisionGroup, blocksCollisionGroup,
-    pointer, batmanKeys, supermanKeys,
-    canCreateBlock = true, lastBlockCoords = {x: -1, y: -1},
-    player = 'batman', canUpdateResult = true;
+    var platform, block, platformCollisionGroup, blocksCollisionGroup,
+        pointer, batmanKeys, supermanKeys,
+        canCreateBlock = true, lastBlockCoords = { x: -1, y: -1 },
+        player = 'batman', canUpdateResult = true;
 
-    function endGame () {
+    function endGame() {
         this.game.state.start('GameOver');
     }
 
-    function switchPlayer () {
+    function switchPlayer() {
         player = (player === 'batman') ? 'superman' : 'batman';
     }
 
-    function reactToBlockState () {
-        if(block){
+    function reactToBlockState() {
+        if (block) {
             var blockX = round(block.body.x),
                 blockY = round(block.body.y);
 
-            if((lastBlockCoords.x == blockX  && lastBlockCoords.y == blockY) ||
-                block.body.y > CONST.game.world.height){
-                if(canUpdateResult) {
+            if ((lastBlockCoords.x == blockX && lastBlockCoords.y == blockY) ||
+                block.body.y > CONST.game.world.height) {
+                if (canUpdateResult) {
 
                     if (block.body.y > CONST.game.world.height) {
                         stats[player].logic.score -= 50;
                         stats[player].logic.lives -= 1;
 
-                        if(stats[player].logic.lives == 0){
+                        if (stats[player].logic.lives == 0) {
                             endGame();
                         }
 
@@ -42,7 +42,7 @@ var platform, block, platformCollisionGroup, blocksCollisionGroup,
                     canCreateBlock = true;
                     canUpdateResult = false;
 
-                        console.log(player + '       score:' + stats[player].logic.score +'         lives:'+ stats[player].logic.lives);
+                    console.log(player + '       score:' + stats[player].logic.score + '         lives:' + stats[player].logic.lives);
                     switchPlayer();
                 }
             }
@@ -52,11 +52,11 @@ var platform, block, platformCollisionGroup, blocksCollisionGroup,
         }
     }
 
-    function round (num) {
+    function round(num) {
         return Math.round(num * 100) / 100;
     }
 
-    function createCube (x) {
+    function createCube(x) {
         block = game.add.sprite(x, 0, 'cube');
         game.physics.p2.enable(block);
         block.body.setCollisionGroup(blocksCollisionGroup);
@@ -69,28 +69,28 @@ var platform, block, platformCollisionGroup, blocksCollisionGroup,
         canUpdateResult = true;
     }
 
-    function updatePointer (directionKeys) {
+    function updatePointer(directionKeys) {
         pointer.body.setZeroVelocity();
 
         if (directionKeys.left.isDown) {
-            if(pointer.body.x - pointer.width / 2 > 0) {
+            if (pointer.body.x - pointer.width / 2 > 0) {
                 pointer.body.velocity.x = -CONST.game.physics.playerXVelocity;
             }
         } else if (directionKeys.right.isDown) {
-            if(pointer.body.x + pointer.width / 2 < CONST.game.world.width) {
+            if (pointer.body.x + pointer.width / 2 < CONST.game.world.width) {
                 pointer.body.velocity.x = CONST.game.physics.playerXVelocity;
             }
         }
 
         if (directionKeys.fire.isDown) {
-            if(canCreateBlock) {
+            if (canCreateBlock) {
                 createCube(pointer.body.x);
             }
         }
     }
 
     var logicLevel = {
-        preload : function() {
+        preload: function () {
             this.game.load.image('platform', 'imgs/platform.png');
             this.game.load.image('cube', 'imgs/cube.png');
             this.game.load.image('background', 'imgs/logicLevelBackground.png');
@@ -116,14 +116,14 @@ var platform, block, platformCollisionGroup, blocksCollisionGroup,
 
             pointer = game.add.sprite(380, 0, 'pointer');
             game.physics.p2.enable(pointer);
-            pointer.body.kinematic  = true;
+            pointer.body.kinematic = true;
             pointer.body.collideWorldBounds = true;
         },
-        update: function(){
+        update: function () {
             updatePointer(player == 'superman' ? batmanKeys : supermanKeys);
             reactToBlockState();
         }
     };
 
     return logicLevel;
-}());
+} ());
