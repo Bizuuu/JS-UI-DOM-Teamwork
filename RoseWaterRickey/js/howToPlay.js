@@ -33,19 +33,22 @@ Game.HowToPlay.prototype = (function () {
 
     function initializeJumpingLevel () {
         layers.jumping = this.game.add.group();
-        var jumpingText = this.game.add.text(20, 320, 'JUMPING', {font: '60px Consolas', fill: '#ffffff'});
+        var jumpingText = this.game.add.text(50, 220, 'JUMPING', {font: '60px Consolas', fill: '#ffffff'});
+        var sampleText = this.game.add.text(50, 310, 'sample text', {font: '20px Consolas', fill: '#ffffff'});
         layers.jumping.add(jumpingText);
+        layers.jumping.add(sampleText);
+
     }
 
     function initializeAsteroidLevel () {
         layers.asteroid = this.game.add.group();
-        var asteroidText = this.game.add.text(20, 320, 'ASTEROID', {font: '60px Consolas', fill: '#ffffff'});
+        var asteroidText = this.game.add.text(50, 220, 'ASTEROID', {font: '60px Consolas', fill: '#ffffff'});
         layers.asteroid.add(asteroidText);
     }
 
     function initializeLogicLevel () {
         layers.logic = this.game.add.group();
-        var logicText = this.game.add.text(20, 320, 'LOGIC', {font: '60px Consolas', fill: '#ffffff'});
+        var logicText = this.game.add.text(50, 220, 'LOGIC', {font: '60px Consolas', fill: '#ffffff'});
         layers.logic.add(logicText);
     }
 
@@ -65,18 +68,22 @@ Game.HowToPlay.prototype = (function () {
     var howToPlay = {
         preload: function () {
             this.game.load.image('menu', 'imgs/menu.png');
-            this.game.load.image('jumping', 'imgs/one.png');
-            this.game.load.image('asteroid', 'imgs/two.png');
-            this.game.load.image('logic', 'imgs/three.png');
+            this.game.load.image('jumping', 'imgs/howToPlay/jumpLevel.png');
+            this.game.load.image('asteroid', 'imgs/howToPlay/asteroidLevel.png');
+            this.game.load.image('logic', 'imgs/howToPlay/logicLevel.png');
+            this.game.load.image('arrows', 'imgs/howToPlay/arrowKeys.png')
         },
         create: function () {
-            this.game.add.button(370, 480, 'menu', this.returnToMenu, this.game, 1, 0, 2);
+            this.game.add.button(370, 480, 'menu', this.returnToMenu, this.game);
+            //location for wasd image 400(or 450), 200
+            this.game.add.sprite(550, 200, 'arrows');
 
             intializeGroups();
             
             initializeButton(jumpingButton, 'jumping', 50, 50);
-            initializeButton(asteroidButton, 'asteroid', 130, 50);
-            initializeButton(logicButton, 'logic', 240, 50);
+            initializeButton(asteroidButton, 'asteroid', 150, 50);
+            initializeButton(logicButton, 'logic', 250, 50);
+
 
             currentLayer = 'jumping';
             showGroup(layers[currentLayer]);
