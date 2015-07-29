@@ -18,8 +18,8 @@ Game.Menu.prototype = (function () {
             music.play();
             this.game.add.sprite(0, 0, 'menu');
             this.game.add.button(256, 318, 'playButton', this.startGame, this.game, 1, 0, 2);
-            //this.add.button(this, 100, 425, 'teamButton', this.showTeam, this.game, 1, 0, 2);
-            //this.add.button(this, 550, 440, 'howToButton', this.showGameInfo, this.game, 1, 0, 2);
+            this.game.add.button(100, 425, 'teamButton', this.showTeam, this.game, 1, 0, 2);
+            this.game.add.button(550, 440, 'howToButton', this.showGameInfo, this.game, 1, 0, 2);
 
         },
         startGame: function () {
