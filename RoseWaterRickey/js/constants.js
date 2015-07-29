@@ -18,8 +18,10 @@ var CONST = {
             playerYVelocity: 350,
             p2Gravity: 200,
             bulletVelocity: 200,
-            asteroidVelocity: 150,
-            asteroidGenerationFrequency: 450
+            asteroids: {
+                Velocity: 100,
+                GenerationFrequency: 550
+            }
         }
     }
 };

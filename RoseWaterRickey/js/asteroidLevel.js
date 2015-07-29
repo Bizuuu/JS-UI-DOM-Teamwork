@@ -43,13 +43,13 @@ Game.AsteroidLevel.prototype = (function () {
 
     function createAsteroid() {
         asteroid = asteroids.create(game.world.randomX, 0, 'asteroid');
-        asteroid.body.velocity.y = CONST.game.physics.asteroidVelocity;
+        asteroid.body.velocity.y = CONST.game.physics.asteroids.Velocity * (Math.random() + 1.1);
     }
 
     function generateAsteroids() {
         if (game.time.now > asteroidTime) {
             createAsteroid(asteroids)
-            asteroidTime = game.time.now + CONST.game.physics.asteroidGenerationFrequency;
+            asteroidTime = game.time.now + CONST.game.physics.asteroids.GenerationFrequency;
         }
     }
 
