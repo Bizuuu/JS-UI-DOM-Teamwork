@@ -4,8 +4,19 @@ var game = new Phaser.Game(CONST.game.width, CONST.game.height, Phaser.AUTO, '',
     update: update
 });
 
+function emitParticles(positionX, positionY, sprite, scale, count) {
+    var emitter = game.add.emitter(positionX, positionY, 100);
+    emitter.makeParticles(sprite);
+    emitter.minParticleScale = scale;
+    emitter.maxParticleScale = scale;
+    emitter.gravity = 200;
+    emitter.bounce.setTo(0.2, 0.2);
+    emitter.angularDrag = 30;
+    emitter.start(true, 2000, null, count);
+}
 
 function preload() {
+    
 }
 
 function createGame() {
@@ -17,21 +28,16 @@ function createGame() {
     game.state.add('GameOver', Game.GameOver);
     game.state.add('HowToPlay', Game.HowToPlay);
 
-    game.state.start('Menu');
+    game.state.start('Asteroid');
 }
 
-function update(){
+function update() {
     /*
 
     Needs a lot of refactoring.
 
-
 	 var pauseText;
 	game.paused = false;
-	
-
-
-
     window.onkeydown = function () {
         if (game.input.keyboard.event.keyCode == 80) { //button "P"
             if (!game.paused) {

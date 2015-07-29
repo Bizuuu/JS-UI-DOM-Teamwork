@@ -14,6 +14,7 @@ Game.AsteroidLevel.prototype = (function () {
         run,
         asteroid,
         asteroids,
+        emitter,
         healthBars,
         playerCollisionTime = 0,
         asteroidTime = 0;
@@ -103,24 +104,16 @@ Game.AsteroidLevel.prototype = (function () {
         this.game.physics.arcade.collide(players.batman.sprite, players.superman.sprite, playersCollisionHandler);
     }
 
-    function asteroidPlayerCollisionHandler(player, asteroid) {
-        var emitter = game.add.emitter(asteroid.position.x + 10, asteroid.position.y + 30, 100);             
+    function asteroidPlayerCollisionHandler(player, asteroid) {             
         players[player.key].health -= 40;        
         healthBars[player.key].setHealth(players[player.key].health / CONST.player.maxHealth);  
+        emitParticles(asteroid.position.x + 10, asteroid.position.y + 20, 'asteroidParticle', 0.55, 5);
         asteroid.kill();
-
-        emitter.makeParticles('asteroidParticle');
-        emitter.gravity = 300;
-        emitter.start(true, 2000, null, 4);
     }
 
     function asteroidGroundCollisionHandler(asteroid, platform) {
-        var emitter = game.add.emitter(asteroid.position.x + 10, asteroid.position.y + 30, 100);
+        emitParticles(asteroid.position.x + 10, asteroid.position.y + 20, 'asteroidParticle', 0.55, 10);
         asteroid.kill();
-
-        emitter.makeParticles('asteroidParticle');
-        emitter.gravity = 300;
-        emitter.start(true, 2000, null, 10);
     }
 
     function playersCollisionHandler() {

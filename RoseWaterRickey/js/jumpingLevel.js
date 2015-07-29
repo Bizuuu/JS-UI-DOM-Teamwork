@@ -13,7 +13,6 @@ Game.JumpingLevel.prototype = (function () {
         run,
         bulletTime = 0,
         healthBars,
-        emitter,
         playerCollisionTime = 0;
 
     function playFx(action) {
@@ -88,22 +87,11 @@ Game.JumpingLevel.prototype = (function () {
         }
     }
 
-    function emitParticles(positionX, positionY, sprite) {
-        emitter = game.add.emitter(positionX, positionY, 100);
-        emitter.makeParticles(sprite);
-        emitter.minParticleScale = 0.3;
-        emitter.maxParticleScale = 0.3;
-        emitter.gravity = 200;
-        emitter.bounce.setTo(0.2, 0.2);
-        emitter.angularDrag = 30;
-        emitter.start(true, 2000, null, 10);
-    }
-
     function updatePlayerBullets(player) {
         game.physics.arcade.overlap(platforms, player.bullets, function (bullet, platforms) {
             bullet.kill();
             player.removeBullet(bullet);
-            emitParticles(bullet.position.x, bullet.position.y, 'bullet');
+            emitParticles(bullet.position.x + 5, bullet.position.y + 5, 'bullet', 0.3, 10);
         }, null, this);
     }
 
@@ -120,7 +108,7 @@ Game.JumpingLevel.prototype = (function () {
         stats[attackingPlayer].jumping.score += 20;
         players[shotPlayer].health -= 20;
         healthBars[shotPlayer].setHealth(players[shotPlayer].health / CONST.player.maxHealth);
-        emitParticles(bullet.position.x, bullet.position.y, 'bullet');
+        emitParticles(bullet.position.x + 5, bullet.position.y + 5, 'bullet', 0.3, 10);
     }
 
     function playersCollisionHandler() {
