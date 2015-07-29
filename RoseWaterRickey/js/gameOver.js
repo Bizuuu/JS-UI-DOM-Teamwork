@@ -33,7 +33,7 @@ Game.GameOver.prototype = (function () {
             texts = this.game.add.sprite(40, 150, 'texts');
             texts.scale.setTo(0.9, 0.9);
             //animate the yoyo effect
-            this.game.add.tween(texts).to({y: 200}, 500, Phaser.Easing.Cubic.InOut, true, 100, 2, true);
+            this.game.add.tween(texts).to({y: 200}, 500, Phaser.Easing.Cubic.InOut, true, 100, 0, true);
 
             //rotating figures
             batmanGO = this.game.add.sprite(80, 460, 'batman');
