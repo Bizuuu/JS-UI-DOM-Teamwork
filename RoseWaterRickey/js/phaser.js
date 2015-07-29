@@ -2026,7 +2026,7 @@ PIXI.SpriteBatch.prototype._renderCanvas = function(renderSession)
  * @constructor
  * @param text {String} The copy that you would like the text to display
  * @param [style] {Object} The style parameters
- * @param [style.font] {String} default 'bold 20px Arial' The style and size of the font
+ * @param [style.fonts] {String} default 'bold 20px Arial' The style and size of the fonts
  * @param [style.fill='black'] {String|Number} A canvas fillstyle that will be used on the text e.g 'red', '#00FF00'
  * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
  * @param [style.stroke] {String|Number} A canvas fillstyle that will be used on the text stroke e.g 'blue', '#FCFF00'
@@ -2126,7 +2126,7 @@ Object.defineProperty(PIXI.Text.prototype, 'height', {
  *
  * @method setStyle
  * @param [style] {Object} The style parameters
- * @param [style.font='bold 20pt Arial'] {String} The style and size of the font
+ * @param [style.fonts='bold 20pt Arial'] {String} The style and size of the fonts
  * @param [style.fill='black'] {Object} A canvas fillstyle that will be used on the text eg 'red', '#00FF00'
  * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
  * @param [style.stroke='black'] {String} A canvas fillstyle that will be used on the text stroke eg 'blue', '#FCFF00'
@@ -2551,7 +2551,7 @@ PIXI.Text.fontPropertiesContext = PIXI.Text.fontPropertiesCanvas.getContext('2d'
  */
 
 /**
- * A BitmapText object will create a line or multiple lines of text using bitmap font. To split a line you can use '\n', '\r' or '\r\n' in your string.
+ * A BitmapText object will create a line or multiple lines of text using bitmap fonts. To split a line you can use '\n', '\r' or '\r\n' in your string.
  * You can generate the fnt files using
  * http://www.angelcode.com/products/bmfont/ for windows or
  * http://www.bmglyph.com/ for mac.
@@ -2561,7 +2561,7 @@ PIXI.Text.fontPropertiesContext = PIXI.Text.fontPropertiesCanvas.getContext('2d'
  * @constructor
  * @param text {String} The copy that you would like the text to display
  * @param style {Object} The style parameters
- * @param style.font {String} The size (optional) and bitmap font id (required) eq 'Arial' or '20px Arial' (must have loaded previously)
+ * @param style.fonts {String} The size (optional) and bitmap fonts id (required) eq 'Arial' or '20px Arial' (must have loaded previously)
  * @param [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text
  */
 PIXI.BitmapText = function(text, style)
@@ -2646,7 +2646,7 @@ PIXI.BitmapText.prototype.setText = function(text)
 
 /**
  * Set the style of the text
- * style.font {String} The size (optional) and bitmap font id (required) eq 'Arial' or '20px Arial' (must have loaded previously)
+ * style.fonts {String} The size (optional) and bitmap fonts id (required) eq 'Arial' or '20px Arial' (must have loaded previously)
  * [style.align='left'] {String} Alignment for multiline text ('left', 'center' or 'right'), does not affect single lines of text
  *
  * @method setStyle
@@ -36639,7 +36639,7 @@ Phaser.GameObjectFactory.prototype = {
     * @param {number} x - X position of the new text object.
     * @param {number} y - Y position of the new text object.
     * @param {string} text - The actual text that will be written.
-    * @param {object} style - The style object containing style attributes like font, font size , etc.
+    * @param {object} style - The style object containing style attributes like fonts, fonts size , etc.
     * @param {Phaser.Group} [group] - Optional Group to add the object to. If not specified it will be added to the World group.
     * @return {Phaser.Text} The newly created text object.
     */
@@ -36715,7 +36715,7 @@ Phaser.GameObjectFactory.prototype = {
     * Create a new RetroFont object.
     *
     * A RetroFont can be used as a texture for an Image or Sprite and optionally add it to the Cache.
-    * A RetroFont uses a bitmap which contains fixed with characters for the font set. You use character spacing to define the set.
+    * A RetroFont uses a bitmap which contains fixed with characters for the fonts set. You use character spacing to define the set.
     * If you need variable width character support then use a BitmapText object instead. The main difference between a RetroFont and a BitmapText
     * is that a RetroFont creates a single texture that you can apply to a game object, where-as a BitmapText creates one Sprite object per letter of text.
     * The texture can be asssigned or one or multiple images/sprites, but note that the text the RetroFont uses will be shared across them all,
@@ -36723,14 +36723,14 @@ Phaser.GameObjectFactory.prototype = {
     *
     * @method Phaser.GameObjectFactory#retroFont
     * @param {string} font - The key of the image in the Game.Cache that the RetroFont will use.
-    * @param {number} characterWidth - The width of each character in the font set.
-    * @param {number} characterHeight - The height of each character in the font set.
-    * @param {string} chars - The characters used in the font set, in display order. You can use the TEXT_SET consts for common font set arrangements.
-    * @param {number} charsPerRow - The number of characters per row in the font set.
-    * @param {number} [xSpacing=0] - If the characters in the font set have horizontal spacing between them set the required amount here.
-    * @param {number} [ySpacing=0] - If the characters in the font set have vertical spacing between them set the required amount here.
-    * @param {number} [xOffset=0] - If the font set doesn't start at the top left of the given image, specify the X coordinate offset here.
-    * @param {number} [yOffset=0] - If the font set doesn't start at the top left of the given image, specify the Y coordinate offset here.
+    * @param {number} characterWidth - The width of each character in the fonts set.
+    * @param {number} characterHeight - The height of each character in the fonts set.
+    * @param {string} chars - The characters used in the fonts set, in display order. You can use the TEXT_SET consts for common fonts set arrangements.
+    * @param {number} charsPerRow - The number of characters per row in the fonts set.
+    * @param {number} [xSpacing=0] - If the characters in the fonts set have horizontal spacing between them set the required amount here.
+    * @param {number} [ySpacing=0] - If the characters in the fonts set have vertical spacing between them set the required amount here.
+    * @param {number} [xOffset=0] - If the fonts set doesn't start at the top left of the given image, specify the X coordinate offset here.
+    * @param {number} [yOffset=0] - If the fonts set doesn't start at the top left of the given image, specify the Y coordinate offset here.
     * @return {Phaser.RetroFont} The newly created RetroFont texture which can be applied to an Image or Sprite.
     */
     retroFont: function (font, characterWidth, characterHeight, chars, charsPerRow, xSpacing, ySpacing, xOffset, yOffset) {
@@ -36745,9 +36745,9 @@ Phaser.GameObjectFactory.prototype = {
     * @method Phaser.GameObjectFactory#bitmapText
     * @param {number} x - X position of the new bitmapText object.
     * @param {number} y - Y position of the new bitmapText object.
-    * @param {string} font - The key of the BitmapText font as stored in Game.Cache.
+    * @param {string} font - The key of the BitmapText fonts as stored in Game.Cache.
     * @param {string} [text] - The actual text that will be rendered. Can be set later via BitmapText.text.
-    * @param {number} [size] - The size the font will be rendered in, in pixels.
+    * @param {number} [size] - The size the fonts will be rendered in, in pixels.
     * @param {Phaser.Group} [group] - Optional Group to add the object to. If not specified it will be added to the World group.
     * @return {Phaser.BitmapText} The newly created bitmapText object.
     */
@@ -37081,7 +37081,7 @@ Phaser.GameObjectCreator.prototype = {
     * @param {number} x - X position of the new text object.
     * @param {number} y - Y position of the new text object.
     * @param {string} text - The actual text that will be written.
-    * @param {object} style - The style object containing style attributes like font, font size , etc.
+    * @param {object} style - The style object containing style attributes like fonts, fonts size , etc.
     * @return {Phaser.Text} The newly created text object.
     */
     text: function (x, y, text, style) {
@@ -37148,7 +37148,7 @@ Phaser.GameObjectCreator.prototype = {
     * Create a new RetroFont object.
     *
     * A RetroFont can be used as a texture for an Image or Sprite and optionally add it to the Cache.
-    * A RetroFont uses a bitmap which contains fixed with characters for the font set. You use character spacing to define the set.
+    * A RetroFont uses a bitmap which contains fixed with characters for the fonts set. You use character spacing to define the set.
     * If you need variable width character support then use a BitmapText object instead. The main difference between a RetroFont and a BitmapText
     * is that a RetroFont creates a single texture that you can apply to a game object, where-as a BitmapText creates one Sprite object per letter of text.
     * The texture can be asssigned or one or multiple images/sprites, but note that the text the RetroFont uses will be shared across them all,
@@ -37156,14 +37156,14 @@ Phaser.GameObjectCreator.prototype = {
     *
     * @method Phaser.GameObjectCreator#retroFont
     * @param {string} font - The key of the image in the Game.Cache that the RetroFont will use.
-    * @param {number} characterWidth - The width of each character in the font set.
-    * @param {number} characterHeight - The height of each character in the font set.
-    * @param {string} chars - The characters used in the font set, in display order. You can use the TEXT_SET consts for common font set arrangements.
-    * @param {number} charsPerRow - The number of characters per row in the font set.
-    * @param {number} [xSpacing=0] - If the characters in the font set have horizontal spacing between them set the required amount here.
-    * @param {number} [ySpacing=0] - If the characters in the font set have vertical spacing between them set the required amount here.
-    * @param {number} [xOffset=0] - If the font set doesn't start at the top left of the given image, specify the X coordinate offset here.
-    * @param {number} [yOffset=0] - If the font set doesn't start at the top left of the given image, specify the Y coordinate offset here.
+    * @param {number} characterWidth - The width of each character in the fonts set.
+    * @param {number} characterHeight - The height of each character in the fonts set.
+    * @param {string} chars - The characters used in the fonts set, in display order. You can use the TEXT_SET consts for common fonts set arrangements.
+    * @param {number} charsPerRow - The number of characters per row in the fonts set.
+    * @param {number} [xSpacing=0] - If the characters in the fonts set have horizontal spacing between them set the required amount here.
+    * @param {number} [ySpacing=0] - If the characters in the fonts set have vertical spacing between them set the required amount here.
+    * @param {number} [xOffset=0] - If the fonts set doesn't start at the top left of the given image, specify the X coordinate offset here.
+    * @param {number} [yOffset=0] - If the fonts set doesn't start at the top left of the given image, specify the Y coordinate offset here.
     * @return {Phaser.RetroFont} The newly created RetroFont texture which can be applied to an Image or Sprite.
     */
     retroFont: function (font, characterWidth, characterHeight, chars, charsPerRow, xSpacing, ySpacing, xOffset, yOffset) {
@@ -37178,9 +37178,9 @@ Phaser.GameObjectCreator.prototype = {
     * @method Phaser.GameObjectCreator#bitmapText
     * @param {number} x - X position of the new bitmapText object.
     * @param {number} y - Y position of the new bitmapText object.
-    * @param {string} font - The key of the BitmapText font as stored in Game.Cache.
+    * @param {string} font - The key of the BitmapText fonts as stored in Game.Cache.
     * @param {string} [text] - The actual text that will be rendered. Can be set later via BitmapText.text.
-    * @param {number} [size] - The size the font will be rendered in, in pixels.
+    * @param {number} [size] - The size the fonts will be rendered in, in pixels.
     * @return {Phaser.BitmapText} The newly created bitmapText object.
     */
     bitmapText: function (x, y, font, text, size) {
@@ -40056,15 +40056,15 @@ Phaser.BitmapData.prototype = {
     },
 
     /**
-    * Draws text to the BitmapData in the given font and color.
-    * The default font is 14px Courier, so useful for quickly drawing debug text.
-    * If you need to do a lot of font work to this BitmapData we'd recommend implementing your own text draw method.
+    * Draws text to the BitmapData in the given fonts and color.
+    * The default fonts is 14px Courier, so useful for quickly drawing debug text.
+    * If you need to do a lot of fonts work to this BitmapData we'd recommend implementing your own text draw method.
     *
     * @method Phaser.BitmapData#text
     * @param {string} text - The text to write to the BitmapData.
     * @param {number} x - The x coordinate of the top-left of the text string.
     * @param {number} y - The y coordinate of the top-left of the text string.
-    * @param {string} [font='14px Courier'] - The font. This is passed directly to Context.font, so anything that can support, this can.
+    * @param {string} [font='14px Courier'] - The fonts. This is passed directly to Context.fonts, so anything that can support, this can.
     * @param {string} [color='rgb(255,255,255)'] - The color the text will be drawn in.
     * @param {boolean} [shadow=true] - Draw a single pixel black shadow below the text (offset by text.x/y + 1)
     * @return {Phaser.BitmapData} This BitmapData object for method chaining.
@@ -40926,7 +40926,7 @@ Phaser.RenderTexture.prototype.render = function (displayObject, position, clear
 * @param {number} x - X position of the new text object.
 * @param {number} y - Y position of the new text object.
 * @param {string} text - The actual text that will be written.
-* @param {object} style - The style object containing style attributes like font, font size, etc.
+* @param {object} style - The style object containing style attributes like fonts, fonts size, etc.
 */
 Phaser.Text = function (game, x, y, text, style) {
 
@@ -40958,7 +40958,7 @@ Phaser.Text = function (game, x, y, text, style) {
 
     /**
     * Specify a padding value which is added to the line width and height when calculating the Text size.
-    * ALlows you to add extra spacing if Phaser is unable to accurately determine the true font dimensions.
+    * ALlows you to add extra spacing if Phaser is unable to accurately determine the true fonts dimensions.
     * @property {Phaser.Point} padding
     */
     this.padding = new Phaser.Point();
@@ -40970,7 +40970,7 @@ Phaser.Text = function (game, x, y, text, style) {
     this._text = text;
 
     /**
-    * @property {object} _fontComponents - The font, broken down into components, set in `setStyle`.
+    * @property {object} _fontComponents - The fonts, broken down into components, set in `setStyle`.
     * @private
     */
     this._fontComponents = null;
@@ -41112,11 +41112,11 @@ Phaser.Text.prototype.setShadow = function (x, y, color, blur) {
 *
 * @method Phaser.Text#setStyle
 * @param {object} [style] - The style properties to be set on the Text.
-* @param {string} [style.font='bold 20pt Arial'] - The style and size of the font.
-* @param {string} [style.fontStyle=(from font)] - The style of the font (eg. 'italic'): overrides the value in `style.font`.
-* @param {string} [style.fontVariant=(from font)] - The variant of the font (eg. 'small-caps'): overrides the value in `style.font`.
-* @param {string} [style.fontWeight=(from font)] - The weight of the font (eg. 'bold'): overrides the value in `style.font`.
-* @param {string|number} [style.fontSize=(from font)] - The size of the font (eg. 32 or '32px'): overrides the value in `style.font`.
+* @param {string} [style.fonts='bold 20pt Arial'] - The style and size of the fonts.
+* @param {string} [style.fontStyle=(from fonts)] - The style of the fonts (eg. 'italic'): overrides the value in `style.fonts`.
+* @param {string} [style.fontVariant=(from fonts)] - The variant of the fonts (eg. 'small-caps'): overrides the value in `style.fonts`.
+* @param {string} [style.fontWeight=(from fonts)] - The weight of the fonts (eg. 'bold'): overrides the value in `style.fonts`.
+* @param {string|number} [style.fontSize=(from fonts)] - The size of the fonts (eg. 32 or '32px'): overrides the value in `style.fonts`.
 * @param {string} [style.backgroundColor=null] - A canvas fillstyle that will be used as the background for the whole Text object. Set to `null` to disable.
 * @param {string} [style.fill='black'] - A canvas fillstyle that will be used on the text eg 'red', '#00FF00'.
 * @param {string} [style.align='left'] - Alignment for multiline text ('left', 'center' or 'right'), does not affect single line text.
@@ -41422,7 +41422,7 @@ Phaser.Text.prototype.runWordWrap = function (text) {
 };
 
 /**
-* Updates the internal `style.font` if it now differs according to generation from components.
+* Updates the internal `style.fonts` if it now differs according to generation from components.
 *
 * @method Phaser.Text#updateFont
 * @private
@@ -41446,22 +41446,22 @@ Phaser.Text.prototype.updateFont = function (components) {
 };
 
 /**
-* Converting a short CSS-font string into the relevant components.
+* Converting a short CSS-fonts string into the relevant components.
 *
 * @method Phaser.Text#fontToComponents
 * @private
-* @param {string} font - a CSS font string
+* @param {string} font - a CSS fonts string
 */
 Phaser.Text.prototype.fontToComponents = function (font) {
 
-    // The format is specified in http://www.w3.org/TR/CSS2/fonts.html#font-shorthand:
+    // The format is specified in http://www.w3.org/TR/CSS2/fonts.html#fonts-shorthand:
     // style - normal | italic | oblique | inherit
     // variant - normal | small-caps | inherit
     // weight - normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit
     // size - xx-small | x-small | small | medium | large | x-large | xx-large,
     //        larger | smaller
     //        {number} (em | ex | ch | rem | vh | vw | vmin | vmax | px | mm | cm | in | pt | pc | %)
-    // font-family - rest (but identifiers or quoted with comma separation)
+    // fonts-family - rest (but identifiers or quoted with comma separation)
     var m = font.match(/^\s*(?:\b(normal|italic|oblique|inherit)?\b)\s*(?:\b(normal|small-caps|inherit)?\b)\s*(?:\b(normal|bold|bolder|lighter|100|200|300|400|500|600|700|800|900|inherit)?\b)\s*(?:\b(xx-small|x-small|small|medium|large|x-large|xx-large|larger|smaller|0|\d*(?:[.]\d*)?(?:%|[a-z]{2,5}))?\b)\s*(.*)\s*$/);
 
     if (m)
@@ -41477,7 +41477,7 @@ Phaser.Text.prototype.fontToComponents = function (font) {
     }
     else
     {
-        console.warn("Phaser.Text - unparsable CSS font: " + font);
+        console.warn("Phaser.Text - unparsable CSS fonts: " + font);
         return {
             font: font
         };
@@ -41486,7 +41486,7 @@ Phaser.Text.prototype.fontToComponents = function (font) {
 };
 
 /**
-* Converts individual font components (see `fontToComponents`) to a short CSS font string.
+* Converts individual fonts components (see `fontToComponents`) to a short CSS fonts string.
 *
 * @method Phaser.Text#componentsToFont
 * @private
@@ -41514,7 +41514,7 @@ Phaser.Text.prototype.componentsToFont = function (components) {
 
     if (!parts.length)
     {
-        // Fallback to whatever value the 'font' was
+        // Fallback to whatever value the 'fonts' was
         parts.push(components.font);
     }
 
@@ -41552,12 +41552,12 @@ Object.defineProperty(Phaser.Text.prototype, 'text', {
 });
 
 /**
-* Change the font used.
+* Change the fonts used.
 *
-* This is equivalent of the `font` property specified to {@link Phaser.Text#setStyle setStyle}, except
-* that unlike using `setStyle` this will not change any current font fill/color settings.
+* This is equivalent of the `fonts` property specified to {@link Phaser.Text#setStyle setStyle}, except
+* that unlike using `setStyle` this will not change any current fonts fill/color settings.
 *
-* The CSS font string can also be individually altered with the `font`, `fontSize`, `fontWeight`, `fontStyle`, and `fontVariant` properties.
+* The CSS fonts string can also be individually altered with the `fonts`, `fontSize`, `fontWeight`, `fontStyle`, and `fontVariant` properties.
 *
 * @name Phaser.Text#cssFont
 * @property {string} cssFont
@@ -41578,15 +41578,15 @@ Object.defineProperty(Phaser.Text.prototype, 'cssFont', {
 });
 
 /**
-* Change the font family that the text will be rendered in, such as 'Arial'.
+* Change the fonts family that the text will be rendered in, such as 'Arial'.
 *
-* Multiple CSS font families and generic fallbacks can be specified as long as
-* {@link http://www.w3.org/TR/CSS2/fonts.html#propdef-font-family CSS font-family rules} are followed.
+* Multiple CSS fonts families and generic fallbacks can be specified as long as
+* {@link http://www.w3.org/TR/CSS2/fonts.html#propdef-fonts-family CSS fonts-family rules} are followed.
 *
-* To change the entire font string use {@link Phaser.Text#cssFont cssFont} instead: eg. `text.cssFont = 'bold 20pt Arial'`.
+* To change the entire fonts string use {@link Phaser.Text#cssFont cssFont} instead: eg. `text.cssFont = 'bold 20pt Arial'`.
 *
 * @name Phaser.Text#font
-* @property {string} font
+* @property {string} fonts
 */
 Object.defineProperty(Phaser.Text.prototype, 'font', {
 
@@ -41613,10 +41613,10 @@ Object.defineProperty(Phaser.Text.prototype, 'font', {
 });
 
 /**
-* The size of the font.
+* The size of the fonts.
 *
-* If the font size is specified in pixels (eg. `32` or `'32px`') then a number (ie. `32`) representing
-* the font size in pixels is returned; otherwise the value with CSS unit is returned as a string (eg. `'12pt'`).
+* If the fonts size is specified in pixels (eg. `32` or `'32px`') then a number (ie. `32`) representing
+* the fonts size in pixels is returned; otherwise the value with CSS unit is returned as a string (eg. `'12pt'`).
 *
 * @name Phaser.Text#fontSize
 * @property {number|string} fontSize
@@ -41655,7 +41655,7 @@ Object.defineProperty(Phaser.Text.prototype, 'fontSize', {
 });
 
 /**
-* The weight of the font: 'normal', 'bold', or {@link http://www.w3.org/TR/CSS2/fonts.html#propdef-font-weight a valid CSS font weight}.
+* The weight of the fonts: 'normal', 'bold', or {@link http://www.w3.org/TR/CSS2/fonts.html#propdef-fonts-weight a valid CSS fonts weight}.
 * @name Phaser.Text#fontWeight
 * @property {string} fontWeight
 */
@@ -41676,7 +41676,7 @@ Object.defineProperty(Phaser.Text.prototype, 'fontWeight', {
 });
 
 /**
-* The style of the font: 'normal', 'italic', 'oblique'
+* The style of the fonts: 'normal', 'italic', 'oblique'
 * @name Phaser.Text#fontStyle
 * @property {string} fontStyle
 */
@@ -41697,7 +41697,7 @@ Object.defineProperty(Phaser.Text.prototype, 'fontStyle', {
 });
 
 /**
-* The variant the font: 'normal', 'small-caps'
+* The variant the fonts: 'normal', 'small-caps'
 * @name Phaser.Text#fontVariant
 * @property {string} fontVariant
 */
@@ -41971,13 +41971,13 @@ Object.defineProperty(Phaser.Text.prototype, 'shadowBlur', {
 */
 
 /**
-* BitmapText objects work by taking a texture file and an XML file that describes the font structure.
+* BitmapText objects work by taking a texture file and an XML file that describes the fonts structure.
 * It then generates a new Sprite object for each letter of the text, proportionally spaced out and aligned to 
-* match the font structure.
+* match the fonts structure.
 * 
 * BitmapText objects are less flexible than Text objects, in that they have less features such as shadows, fills and the ability 
 * to use Web Fonts, however you trade this flexibility for rendering speed. You can also create visually compelling BitmapTexts by 
-* processing the font texture in an image editor, applying fills and any other effects required.
+* processing the fonts texture in an image editor, applying fills and any other effects required.
 *
 * To create a BitmapText you can use:
 *
@@ -42004,7 +42004,7 @@ Object.defineProperty(Phaser.Text.prototype, 'shadowBlur', {
 * @param {number} y - Y position of the new bitmapText object.
 * @param {string} font - The key of the BitmapFont as stored in Game.Cache.
 * @param {string} [text=''] - The actual text that will be rendered. Can be set later via BitmapText.text.
-* @param {number} [size=32] - The size the font will be rendered in, in pixels.
+* @param {number} [size=32] - The size the fonts will be rendered in, in pixels.
 */
 Phaser.BitmapText = function (game, x, y, font, text, size) {
 
@@ -42190,7 +42190,7 @@ Object.defineProperty(Phaser.BitmapText.prototype, 'tint', {
 
 /**
 * @name Phaser.BitmapText#font
-* @property {string} font - The font the text will be rendered in, i.e. 'Arial'. Must be loaded in the browser before use.
+* @property {string} fonts - The fonts the text will be rendered in, i.e. 'Arial'. Must be loaded in the browser before use.
 */
 Object.defineProperty(Phaser.BitmapText.prototype, 'font', {
 
@@ -42214,7 +42214,7 @@ Object.defineProperty(Phaser.BitmapText.prototype, 'font', {
 
 /**
 * @name Phaser.BitmapText#fontSize
-* @property {number} fontSize - The size of the font in pixels.
+* @property {number} fontSize - The size of the fonts in pixels.
 */
 Object.defineProperty(Phaser.BitmapText.prototype, 'fontSize', {
 
@@ -42268,21 +42268,21 @@ Object.defineProperty(Phaser.BitmapText.prototype, 'text', {
 
 /**
 * A Retro Font is similar to a BitmapFont, in that it uses a texture to render the text. However unlike a BitmapFont every character in a RetroFont
-* is the same size. This makes it similar to a sprite sheet. You typically find font sheets like this from old 8/16-bit games and demos.
+* is the same size. This makes it similar to a sprite sheet. You typically find fonts sheets like this from old 8/16-bit games and demos.
 * 
 * @class Phaser.RetroFont
 * @extends Phaser.RenderTexture
 * @constructor
 * @param {Phaser.Game} game - Current game instance.
-* @param {string} key - The font set graphic set as stored in the Game.Cache.
-* @param {number} characterWidth - The width of each character in the font set.
-* @param {number} characterHeight - The height of each character in the font set.
-* @param {string} chars - The characters used in the font set, in display order. You can use the TEXT_SET consts for common font set arrangements.
-* @param {number} [charsPerRow] - The number of characters per row in the font set. If not given charsPerRow will be the image width / characterWidth.
-* @param {number} [xSpacing=0] - If the characters in the font set have horizontal spacing between them set the required amount here.
-* @param {number} [ySpacing=0] - If the characters in the font set have vertical spacing between them set the required amount here.
-* @param {number} [xOffset=0] - If the font set doesn't start at the top left of the given image, specify the X coordinate offset here.
-* @param {number} [yOffset=0] - If the font set doesn't start at the top left of the given image, specify the Y coordinate offset here.
+* @param {string} key - The fonts set graphic set as stored in the Game.Cache.
+* @param {number} characterWidth - The width of each character in the fonts set.
+* @param {number} characterHeight - The height of each character in the fonts set.
+* @param {string} chars - The characters used in the fonts set, in display order. You can use the TEXT_SET consts for common fonts set arrangements.
+* @param {number} [charsPerRow] - The number of characters per row in the fonts set. If not given charsPerRow will be the image width / characterWidth.
+* @param {number} [xSpacing=0] - If the characters in the fonts set have horizontal spacing between them set the required amount here.
+* @param {number} [ySpacing=0] - If the characters in the fonts set have vertical spacing between them set the required amount here.
+* @param {number} [xOffset=0] - If the fonts set doesn't start at the top left of the given image, specify the X coordinate offset here.
+* @param {number} [yOffset=0] - If the fonts set doesn't start at the top left of the given image, specify the Y coordinate offset here.
 */
 Phaser.RetroFont = function (game, key, characterWidth, characterHeight, chars, charsPerRow, xSpacing, ySpacing, xOffset, yOffset) {
 
@@ -42297,38 +42297,38 @@ Phaser.RetroFont = function (game, key, characterWidth, characterHeight, chars, 
     }
 
     /**
-    * @property {number} characterWidth - The width of each character in the font set.
+    * @property {number} characterWidth - The width of each character in the fonts set.
     */
     this.characterWidth = characterWidth;
 
     /**
-    * @property {number} characterHeight - The height of each character in the font set.
+    * @property {number} characterHeight - The height of each character in the fonts set.
     */
     this.characterHeight = characterHeight;
 
     /**
-    * @property {number} characterSpacingX - If the characters in the font set have horizontal spacing between them set the required amount here.
+    * @property {number} characterSpacingX - If the characters in the fonts set have horizontal spacing between them set the required amount here.
     */
     this.characterSpacingX = xSpacing || 0;
 
     /**
-    * @property {number} characterSpacingY - If the characters in the font set have vertical spacing between them set the required amount here.
+    * @property {number} characterSpacingY - If the characters in the fonts set have vertical spacing between them set the required amount here.
     */
     this.characterSpacingY = ySpacing || 0;
 
     /**
-    * @property {number} characterPerRow - The number of characters per row in the font set.
+    * @property {number} characterPerRow - The number of characters per row in the fonts set.
     */
     this.characterPerRow = charsPerRow;
 
     /**
-    * @property {number} offsetX - If the font set doesn't start at the top left of the given image, specify the X coordinate offset here.
+    * @property {number} offsetX - If the fonts set doesn't start at the top left of the given image, specify the X coordinate offset here.
     * @readonly
     */
     this.offsetX = xOffset || 0;
 
     /**
-    * @property {number} offsetY - If the font set doesn't start at the top left of the given image, specify the Y coordinate offset here.
+    * @property {number} offsetY - If the fonts set doesn't start at the top left of the given image, specify the Y coordinate offset here.
     * @readonly
     */
     this.offsetY = yOffset || 0;
@@ -42339,7 +42339,7 @@ Phaser.RetroFont = function (game, key, characterWidth, characterHeight, chars, 
     this.align = "left";
 
     /**
-    * @property {boolean} multiLine - If set to true all carriage-returns in text will form new lines (see align). If false the font will only contain one single line of text (the default)
+    * @property {boolean} multiLine - If set to true all carriage-returns in text will form new lines (see align). If false the fonts will only contain one single line of text (the default)
     * @default
     */
     this.multiLine = false;
@@ -42351,7 +42351,7 @@ Phaser.RetroFont = function (game, key, characterWidth, characterHeight, chars, 
     this.autoUpperCase = true;
 
     /**
-    * @property {number} customSpacingX - Adds horizontal spacing between each character of the font, in pixels.
+    * @property {number} customSpacingX - Adds horizontal spacing between each character of the fonts, in pixels.
     * @default
     */
     this.customSpacingX = 0;
@@ -42370,12 +42370,12 @@ Phaser.RetroFont = function (game, key, characterWidth, characterHeight, chars, 
     this.fixedWidth = 0;
 
     /**
-    * @property {Image} fontSet - A reference to the image stored in the Game.Cache that contains the font.
+    * @property {Image} fontSet - A reference to the image stored in the Game.Cache that contains the fonts.
     */
     this.fontSet = game.cache.getImage(key);
 
     /**
-    * @property {string} _text - The text of the font image.
+    * @property {string} _text - The text of the fonts image.
     * @private
     */
     this._text = '';
@@ -42428,7 +42428,7 @@ Phaser.RetroFont = function (game, key, characterWidth, characterHeight, chars, 
     game.cache.updateFrameData(key, this.frameData);
 
     /**
-    * @property {Phaser.Image} stamp - The image that is stamped to the RenderTexture for each character in the font.
+    * @property {Phaser.Image} stamp - The image that is stamped to the RenderTexture for each character in the fonts.
     * @readonly
     */
     this.stamp = new Phaser.Image(game, 0, 0, key, 0);
@@ -42571,7 +42571,7 @@ Phaser.RetroFont.prototype.setFixedWidth = function (width, lineAlignment) {
 * @param {number} [characterSpacing=0] - To add horizontal spacing between each character specify the amount in pixels.
 * @param {number} [lineSpacing=0] - To add vertical spacing between each line of text, set the amount in pixels.
 * @param {string} [lineAlignment='left'] - Align each line of multi-line text. Set to RetroFont.ALIGN_LEFT, RetroFont.ALIGN_RIGHT or RetroFont.ALIGN_CENTER.
-* @param {boolean} [allowLowerCase=false] - Lots of bitmap font sets only include upper-case characters, if yours needs to support lower case then set this to true.
+* @param {boolean} [allowLowerCase=false] - Lots of bitmap fonts sets only include upper-case characters, if yours needs to support lower case then set this to true.
 */
 Phaser.RetroFont.prototype.setText = function (content, multiLine, characterSpacing, lineSpacing, lineAlignment, allowLowerCase) {
 
@@ -42711,7 +42711,7 @@ Phaser.RetroFont.prototype.pasteLine = function (line, x, y, customSpacingX) {
         }
         else
         {
-            //  If the character doesn't exist in the font then we don't want a blank space, we just want to skip it
+            //  If the character doesn't exist in the fonts then we don't want a blank space, we just want to skip it
             if (this.grabData[line.charCodeAt(c)] >= 0)
             {
                 this.stamp.frame = this.grabData[line.charCodeAt(c)];
@@ -42757,7 +42757,7 @@ Phaser.RetroFont.prototype.getLongestLine = function () {
 };
 
 /**
-* Internal helper function that removes all unsupported characters from the _text String, leaving only characters contained in the font set.
+* Internal helper function that removes all unsupported characters from the _text String, leaving only characters contained in the fonts set.
 *
 * @method Phaser.RetroFont#removeUnsupportedCharacters
 * @memberof Phaser.RetroFont
@@ -42785,14 +42785,14 @@ Phaser.RetroFont.prototype.removeUnsupportedCharacters = function (stripCR) {
 };
 
 /**
-* Updates the x and/or y offset that the font is rendered from. This updates all of the texture frames, so be careful how often it is called.
+* Updates the x and/or y offset that the fonts is rendered from. This updates all of the texture frames, so be careful how often it is called.
 * Note that the values given for the x and y properties are either ADDED to or SUBTRACTED from (if negative) the existing offsetX/Y values of the characters.
 * So if the current offsetY is 8 and you want it to start rendering from y16 you would call updateOffset(0, 8) to add 8 to the current y offset.
 *
 * @method Phaser.RetroFont#updateOffset
 * @memberof Phaser.RetroFont
-* @param {number} [xOffset=0] - If the font set doesn't start at the top left of the given image, specify the X coordinate offset here.
-* @param {number} [yOffset=0] - If the font set doesn't start at the top left of the given image, specify the Y coordinate offset here.
+* @param {number} [xOffset=0] - If the fonts set doesn't start at the top left of the given image, specify the X coordinate offset here.
+* @param {number} [yOffset=0] - If the fonts set doesn't start at the top left of the given image, specify the Y coordinate offset here.
 */
 Phaser.RetroFont.prototype.updateOffset = function (x, y) {
 
@@ -53319,8 +53319,8 @@ Phaser.Cache.prototype = {
     *
     * @method Phaser.Cache#addBitmapFont
     * @param {string} key - The unique key by which you will reference this object.
-    * @param {string} url - URL of this font xml file.
-    * @param {object} data - Extra font data.
+    * @param {string} url - URL of this fonts xml file.
+    * @param {object} data - Extra fonts data.
     * @param {object} xmlData - Texture atlas frames data.
     * @param {number} [xSpacing=0] - If you'd like to add additional horizontal spacing between the characters then set the pixel value here.
     * @param {number} [ySpacing=0] - If you'd like to add additional vertical spacing between the lines then set the pixel value here.
@@ -54490,7 +54490,7 @@ Phaser.Cache.prototype = {
     },
 
     /**
-    * Removes a bitmap font from the cache.
+    * Removes a bitmap fonts from the cache.
     *
     * @method Phaser.Cache#removeBitmapFont
     * @param {string} key - Key of the asset you want to remove.
@@ -55505,12 +55505,12 @@ Phaser.Loader.prototype = {
     },
 
     /**
-    * Add a new bitmap font ('bitmapfont') loading request.
+    * Add a new bitmap fonts ('bitmapfont') loading request.
     *
     * @method Phaser.Loader#bitmapFont
-    * @param {string} key - Unique asset key of the bitmap font.
-    * @param {string} textureURL - The url of the font image file.
-    * @param {string} [xmlURL] - The url of the font data file (xml/fnt)
+    * @param {string} key - Unique asset key of the bitmap fonts.
+    * @param {string} textureURL - The url of the fonts image file.
+    * @param {string} [xmlURL] - The url of the fonts data file (xml/fnt)
     * @param {object} [xmlData] - An optional XML data object.
     * @param {number} [xSpacing=0] - If you'd like to add additional horizontal spacing between the characters then set the pixel value here.
     * @param {number} [ySpacing=0] - If you'd like to add additional vertical spacing between the lines then set the pixel value here.
@@ -56896,7 +56896,7 @@ Phaser.LoaderParser = {
     * @method Phaser.LoaderParser.bitmapFont
     * @param {Phaser.Game} game - A reference to the current game.
     * @param {object} xml - XML data you want to parse.
-    * @param {string} cacheKey - The key of the texture this font uses in the cache.
+    * @param {string} cacheKey - The key of the texture this fonts uses in the cache.
     * @param {number} [xSpacing=0] - Additional horizontal spacing between the characters.
     * @param {number} [ySpacing=0] - Additional vertical spacing between the characters.
     */
@@ -58989,7 +58989,7 @@ Phaser.Utils.Debug = function (game) {
     this.context = null;
 
     /**
-    * @property {string} font - The font that the debug information is rendered in.
+    * @property {string} fonts - The fonts that the debug information is rendered in.
     * @default '14px Courier'
     */
     this.font = '14px Courier';
@@ -59597,7 +59597,7 @@ Phaser.Utils.Debug.prototype = {
     * @param {number} x - X position of the debug info to be rendered.
     * @param {number} y - Y position of the debug info to be rendered.
     * @param {string} [color] - Color of the debug info to be rendered (format is css color string).
-    * @param {string} [font] - The font of text to draw.
+    * @param {string} [font] - The fonts of text to draw.
     */
     text: function (text, x, y, color, font) {
 

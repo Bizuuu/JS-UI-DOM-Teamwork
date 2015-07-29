@@ -37,7 +37,7 @@ function update(){
         if (game.input.keyboard.event.keyCode == 80) { //button "P"
             if (!game.paused) {
                 game.paused = true;
-				pauseText = game.add.text(0, 0, 'Game is paused!', { font: '26px Calibri', fill: '#fff' });
+				pauseText = game.add.text(0, 0, 'Game is paused!', { fonts: '26px Calibri', fill: '#fff' });
             }
             else {
 				game.paused = false;

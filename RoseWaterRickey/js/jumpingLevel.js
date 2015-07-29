@@ -1,8 +1,8 @@
 var Game = Game || {};
 
-Game.JumpingLevel = function(game) {};
+Game.JumpingLevel = function (game) { };
 
-Game.JumpingLevel.prototype = (function() {
+Game.JumpingLevel.prototype = (function () {
     var platforms,
         log,
         players,
@@ -13,6 +13,7 @@ Game.JumpingLevel.prototype = (function() {
         run,
         bulletTime = 0,
         healthBars,
+        emitter,
         playerCollisionTime = 0;
 
     function playFx(action) {
@@ -87,15 +88,28 @@ Game.JumpingLevel.prototype = (function() {
         }
     }
 
+    function emitParticles(positionX, positionY, sprite) {
+        emitter = game.add.emitter(positionX, positionY, 100);
+        emitter.makeParticles(sprite);
+        emitter.minParticleScale = 0.3;
+        emitter.maxParticleScale = 0.3;
+        emitter.gravity = 200;
+        emitter.bounce.setTo(0.2, 0.2);
+        emitter.angularDrag = 30;
+        emitter.start(true, 2000, null, 10);
+    }
+
     function updatePlayerBullets(player) {
-        game.physics.arcade.overlap(platforms, player.bullets, function(bullet, platforms) {
+        game.physics.arcade.overlap(platforms, player.bullets, function (bullet, platforms) {
             bullet.kill();
             player.removeBullet(bullet);
+            emitParticles(bullet.position.x, bullet.position.y, 'bullet');
         }, null, this);
     }
 
     function checkForWinner() {
         if (players.batman.health <= 0 || players.superman.health <= 0) {
+            music.stop();
             game.state.start('GameOver');
         }
     }
@@ -106,6 +120,7 @@ Game.JumpingLevel.prototype = (function() {
         stats[attackingPlayer].jumping.score += 20;
         players[shotPlayer].health -= 20;
         healthBars[shotPlayer].setHealth(players[shotPlayer].health / CONST.player.maxHealth);
+        emitParticles(bullet.position.x, bullet.position.y, 'bullet');
     }
 
     function playersCollisionHandler() {
@@ -136,10 +151,10 @@ Game.JumpingLevel.prototype = (function() {
         var maxBullets = Math.max(players.superman.bullets.length, players.batman.bullets.length);
         for (var index = 0; index < maxBullets; index += 1) {
             // TODO: Add collision sounds
-            this.game.physics.arcade.collide(players.batman.sprite, players.superman.bullets[index], function(batmanSprite, bullet) {
+            this.game.physics.arcade.collide(players.batman.sprite, players.superman.bullets[index], function (batmanSprite, bullet) {
                 playerAndBulletCollisionHandler('superman', 'batman', batmanSprite, bullet);
             });
-            this.game.physics.arcade.collide(players.superman.sprite, players.batman.bullets[index], function(supermanSprite, bullet) {
+            this.game.physics.arcade.collide(players.superman.sprite, players.batman.bullets[index], function (supermanSprite, bullet) {
                 playerAndBulletCollisionHandler('batman', 'superman', supermanSprite, bullet);
             });
         }
@@ -152,7 +167,7 @@ Game.JumpingLevel.prototype = (function() {
     }
 
     var jumpingLevel = {
-        preload: function() {
+        preload: function () {
             this.game.load.image('background', 'imgs/jumpingLevel/background.png');
             this.game.load.image('log', 'imgs/jumpingLevel/log.png');
             this.game.load.image('greenTexture', 'imgs/jumpingLevel/greenTexture.png');
@@ -165,7 +180,7 @@ Game.JumpingLevel.prototype = (function() {
             this.game.load.spritesheet('bullet', 'imgs/jumpingLevel/EnemyBullet.png', 60, 60);
 
         },
-        create: function() {
+        create: function () {
             music = this.game.add.audio('levelMusic');
             music.play();
             jump = this.game.add.audio('jump');
@@ -196,7 +211,7 @@ Game.JumpingLevel.prototype = (function() {
 
             this.game.input.onDown.add(restartMusic, this);
         },
-        update: function() {
+        update: function () {
             this.game.physics.arcade.collide(players.batman.sprite, platforms);
             this.game.physics.arcade.collide(players.superman.sprite, platforms);
 
@@ -211,4 +226,4 @@ Game.JumpingLevel.prototype = (function() {
     };
 
     return jumpingLevel;
-}());
+} ());
