@@ -25,10 +25,10 @@ Game.GameOver.prototype = (function () {
         create: function () {
             var batmanGO,
                 supermanGO,
-                lights,
                 texts;
             //this.game.add.sprite(0, 0, 'background');
-            this.game.add.sprite(85, 50, 'gameOver');
+            this.game.add.sprite(85, -10, 'gameOver');
+
             texts = this.game.add.sprite(40, 150, 'texts');
             texts.scale.setTo(0.9, 0.9);
             //animate the yoyo effect
@@ -55,7 +55,7 @@ Game.GameOver.prototype = (function () {
                 winnerStampX = 120;   //120
             }
             this.game.time.events.add(Phaser.Timer.SECOND * 0.5, this.announceWinner, this.game);
-            lights = this.game.add.sprite(-10, 348, 'lightsDown');
+            this.game.add.sprite(-10, 348, 'lightsDown');
             //lights.scale.setTo(0.8, 0.8);
 
             this.game.add.button(260, 480, 'menu', this.returnToMenu, this.game).scale.setTo(0.75, 0.75);
