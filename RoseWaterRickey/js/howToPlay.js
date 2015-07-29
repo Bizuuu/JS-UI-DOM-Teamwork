@@ -35,8 +35,8 @@ Game.HowToPlay.prototype = (function () {
     function initializeJumpingLevel () {
         layers.jumping = this.game.add.group();
         var jumpingText = this.game.add.text(50, 220, 'JUMPING', {font: '60px Consolas', fill: '#ffffff'});
-        var sampleText = this.game.add.text(50, 310, 'Jump onto enemy head as many\ntimes as needed to kill your\nenemy.', {font: '20px Consolas', fill: '#ffffff'});
-        var controlsText = this.game.add.text(300, 310, 'wjuehjehdkj', {font: '10px Consolas', fill: '#ffffff'});
+        var sampleText = this.game.add.text(50, 310, 'Shoot your enemy as many\ntimes as needed to kill him.', {font: '20px Consolas', fill: '#ffffff'});
+        var controlsText = this.game.add.text(400, 300, 'wjuehjehdkj', {font: '10px Consolas', fill: '#ffffff'});
         layers.jumping.add(jumpingText);
         layers.jumping.add(sampleText);
         layers.jumping.add(controlsText);
