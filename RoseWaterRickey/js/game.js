@@ -11,9 +11,10 @@ function preload() {
 function createGame() {
     game.state.add('Jumping', Game.JumpingLevel);
     game.state.add('Logic', Game.LogicLevel);
+    game.state.add('Asteroid', Game.AsteroidLevel);
     game.state.add('Menu', Game.Menu);
     game.state.add('GameOver', Game.GameOver);
-    game.state.start('Menu');
+    game.state.start('Asteroid');
 }
 
 function update(){
