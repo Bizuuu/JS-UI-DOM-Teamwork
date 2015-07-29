@@ -35,9 +35,11 @@ Game.HowToPlay.prototype = (function () {
     function initializeJumpingLevel () {
         layers.jumping = this.game.add.group();
         var jumpingText = this.game.add.text(50, 220, 'JUMPING', {font: '60px Consolas', fill: '#ffffff'});
-        var sampleText = this.game.add.text(50, 310, 'sample text', {font: '20px Consolas', fill: '#ffffff'});
+        var sampleText = this.game.add.text(50, 310, 'Jump onto enemy head as many\ntimes as needed to kill your\nenemy.', {font: '20px Consolas', fill: '#ffffff'});
+        var controlsText = this.game.add.text(300, 310, 'wjuehjehdkj', {font: '10px Consolas', fill: '#ffffff'});
         layers.jumping.add(jumpingText);
         layers.jumping.add(sampleText);
+        layers.jumping.add(controlsText);
 
     }
 
@@ -81,7 +83,7 @@ Game.HowToPlay.prototype = (function () {
             this.game.add.sprite(450, 100, 'heroes');
             this.game.add.sprite(600, 200, 'arrows');
             this.game.add.sprite(400, 200, 'wasd');
-            
+
 
 
             intializeGroups();
