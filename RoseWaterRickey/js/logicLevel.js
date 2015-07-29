@@ -90,11 +90,11 @@ Game.LogicLevel.prototype = (function () {
     }
 
     var logicLevel = {
-        preload: function () {
-            this.game.load.image('platform', 'imgs/platform.png');
-            this.game.load.image('cube', 'imgs/cube.png');
-            this.game.load.image('background', 'imgs/logicLevelBackground.png');
-            this.game.load.image('pointer', 'imgs/triangle.png');
+        preload : function() {
+            this.game.load.image('platform', 'imgs/logicLevel/platform.png');
+            this.game.load.image('cube', 'imgs/logicLevel/cube.png');
+            this.game.load.image('background', 'imgs/logicLevel/logicLevelBackground.png');
+            this.game.load.image('pointer', 'imgs/logicLevel/bold.png');
         },
         create: function () {
             this.game.physics.startSystem(Phaser.Physics.P2JS);
@@ -114,7 +114,7 @@ Game.LogicLevel.prototype = (function () {
             platform.body.collides([blocksCollisionGroup]);
             platform.body.static = true;
 
-            pointer = game.add.sprite(380, 0, 'pointer');
+            pointer = game.add.sprite(380, 45, 'pointer');
             game.physics.p2.enable(pointer);
             pointer.body.kinematic = true;
             pointer.body.collideWorldBounds = true;
