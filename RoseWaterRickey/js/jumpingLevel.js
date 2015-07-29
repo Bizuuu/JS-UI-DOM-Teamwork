@@ -23,7 +23,7 @@ Game.JumpingLevel.prototype = (function() {
                 break;
 
             case 'run':
-                run.play();
+                run.play("", 0, 1, false, false);
                 break;
         }
 
