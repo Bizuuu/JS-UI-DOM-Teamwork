@@ -28,7 +28,7 @@ function createGame() {
     game.state.add('GameOver', Game.GameOver);
     game.state.add('HowToPlay', Game.HowToPlay);
     
-    game.state.start('HowToPlay');
+    game.state.start('Menu');
 }
 
 function update() {

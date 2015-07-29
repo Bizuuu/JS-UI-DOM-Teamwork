@@ -59,7 +59,6 @@ Game.GameOver.prototype = (function () {
             this.game.add.sprite(-10, 348, 'lightsDown');
             //lights.scale.setTo(0.8, 0.8);
             this.game.add.button(265, 330, 'playAgain', this.playAgain, this.game, 1, 0, 2);
-
             this.game.add.button(260, 480, 'menu', this.returnToMenu, this.game).scale.setTo(0.75, 0.75);
 
 
