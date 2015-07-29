@@ -7,7 +7,8 @@ Game.HowToPlay.prototype = (function () {
         currentLayer,
         jumpingButton,
         asteroidButton,
-        logicButton;
+        logicButton,
+        controlsText;
     
     function intializeGroups () {
         initializeJumpingLevel();
@@ -71,12 +72,17 @@ Game.HowToPlay.prototype = (function () {
             this.game.load.image('jumping', 'imgs/howToPlay/jumpLevel.png');
             this.game.load.image('asteroid', 'imgs/howToPlay/asteroidLevel.png');
             this.game.load.image('logic', 'imgs/howToPlay/logicLevel.png');
-            this.game.load.image('arrows', 'imgs/howToPlay/arrowKeys.png')
+            this.game.load.image('arrows', 'imgs/howToPlay/arrowKeys.png');
+            this.game.load.image('wasd', 'imgs/howToPlay/wasdKeys.png');
+            this.game.load.image('heroes', 'imgs/howToPlay/heroes.png');
         },
         create: function () {
             this.game.add.button(370, 480, 'menu', this.returnToMenu, this.game);
-            //location for wasd image 400(or 450), 200
-            this.game.add.sprite(550, 200, 'arrows');
+            this.game.add.sprite(450, 100, 'heroes');
+            this.game.add.sprite(600, 200, 'arrows');
+            this.game.add.sprite(400, 200, 'wasd');
+            
+
 
             intializeGroups();
             
