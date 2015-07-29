@@ -103,8 +103,8 @@ Game.AsteroidLevel.prototype = (function () {
 
     function asteroidPlayerCollisionHandler(player, asteroid) {
         var emitter = game.add.emitter(asteroid.position.x + 10, asteroid.position.y + 30, 100);             
+        players[player.key].health -= 40;        
         healthBars[player.key].setHealth(players[player.key].health / CONST.player.maxHealth);  
-        players[player.key].health -= 40;
         asteroid.kill();
 
         emitter.makeParticles('asteroidParticle');
