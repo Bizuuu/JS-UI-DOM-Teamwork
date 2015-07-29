@@ -48,7 +48,8 @@ Game.AsteroidLevel.prototype = (function () {
 
     function generateAsteroids() {
         if (game.time.now > asteroidTime) {
-            createAsteroid(asteroids)
+            createAsteroid();
+            createAsteroid();
             asteroidTime = game.time.now + CONST.game.physics.asteroids.GenerationFrequency;
         }
     }

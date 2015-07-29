@@ -17,7 +17,7 @@ function createGame() {
     game.state.add('GameOver', Game.GameOver);
     game.state.add('HowToPlay', Game.HowToPlay);
 
-    game.state.start('GameOver');
+    game.state.start('Asteroid');
 }
 
 function update(){
