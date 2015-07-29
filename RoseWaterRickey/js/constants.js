@@ -22,6 +22,10 @@ var CONST = {
                 Velocity: 140,
                 GenerationFrequency: 500
             }
+        },
+        counterGame:{
+            count: 1,
+            levelNumber: 3
         }
     }
 };
