@@ -27,10 +27,12 @@ Game.Menu.prototype = (function () {
             this.state.start('Jumping');
         },
         showTeam: function () {
-
+            music.stop();
+            this.state.start('About');
         },
         showGameInfo: function () {
-
+            music.stop();
+            this.state.start('HowToPlay');
         }
     };
 
