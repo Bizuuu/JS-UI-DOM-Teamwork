@@ -109,6 +109,7 @@ Game.JumpingLevel.prototype = (function () {
 
     function checkForWinner() {
         if (players.batman.health <= 0 || players.superman.health <= 0) {
+            music.stop();
             game.state.start('GameOver');
         }
     }
