@@ -10,7 +10,7 @@ Game.Menu.prototype = (function () {
         preload: function () {
 
             this.game.load.image('menu', 'imgs/menuImgs/menuBackground.png');
-            this.game.load.spritesheet('playButton', 'imgs/menuImgs/buttonSprite2.png', 274, 143);
+            this.game.load.spritesheet('playButton', 'imgs/menuImgs/buttonSprite.png', 274, 143);
             this.game.load.spritesheet('teamButton', 'imgs/menuImgs/teamButtonSprite.png', 118, 108);
             this.game.load.spritesheet('howToButton', 'imgs/menuImgs/howToSprite.png', 118, 110);
             this.game.load.audio('menuMusic', ['audio/mainTheme.mp3']);
