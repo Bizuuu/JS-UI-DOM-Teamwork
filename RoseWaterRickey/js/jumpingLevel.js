@@ -153,16 +153,16 @@ Game.JumpingLevel.prototype = (function() {
 
     var jumpingLevel = {
         preload: function() {
-            this.game.load.image('background', 'imgs/background.png');
-            this.game.load.image('log', 'imgs/log.png');
-            this.game.load.image('greenTexture', 'imgs/greenTexture.png');
-            this.game.load.image('redTexture', 'imgs/redTexture.png');
+            this.game.load.image('background', 'imgs/jumpingLevel/background.png');
+            this.game.load.image('log', 'imgs/jumpingLevel/log.png');
+            this.game.load.image('greenTexture', 'imgs/jumpingLevel/greenTexture.png');
+            this.game.load.image('redTexture', 'imgs/jumpingLevel/redTexture.png');
             this.game.load.audio('levelMusic', ['audio/jumpingLevelTheme.mp3']);
             this.game.load.audio('jump', 'audio/jump.mp3');
             this.game.load.audio('running', 'audio/running.mp3');
-            this.game.load.spritesheet('batman', 'imgs/batmanSprite.png', 53, 48);
-            this.game.load.spritesheet('superman', 'imgs/supermanSprite.png', 53, 55);
-            this.game.load.spritesheet('bullet', 'imgs/EnemyBullet.png', 60, 60);
+            this.game.load.spritesheet('batman', 'imgs/jumpingLevel/batmanSprite.png', 53, 48);
+            this.game.load.spritesheet('superman', 'imgs/jumpingLevel/supermanSprite.png', 53, 55);
+            this.game.load.spritesheet('bullet', 'imgs/jumpingLevel/EnemyBullet.png', 60, 60);
 
         },
         create: function() {
