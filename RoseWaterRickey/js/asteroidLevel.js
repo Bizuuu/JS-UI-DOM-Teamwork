@@ -102,14 +102,23 @@ Game.AsteroidLevel.prototype = (function () {
     }
 
     function asteroidPlayerCollisionHandler(player, asteroid) {
-        asteroid.kill();
+        var emitter = game.add.emitter(asteroid.position.x + 10, asteroid.position.y + 30, 100);             
+        healthBars[player.key].setHealth(players[player.key].health / CONST.player.maxHealth);  
         players[player.key].health -= 40;
-        healthBars[player.key].setHealth(players[player.key].health / CONST.player.maxHealth);
+        asteroid.kill();
+
+        emitter.makeParticles('asteroidParticle');
+        emitter.gravity = 300;
+        emitter.start(true, 2000, null, 4);
     }
 
     function asteroidGroundCollisionHandler(asteroid, platform) {
+        var emitter = game.add.emitter(asteroid.position.x + 10, asteroid.position.y + 30, 100);
         asteroid.kill();
-        // TODO: Add partical thingies
+
+        emitter.makeParticles('asteroidParticle');
+        emitter.gravity = 300;
+        emitter.start(true, 2000, null, 10);
     }
 
     function playersCollisionHandler() {
@@ -140,8 +149,9 @@ Game.AsteroidLevel.prototype = (function () {
         preload: function () {
             this.game.load.image('background', 'imgs/jumpingLevel/background.png');
             this.game.load.image('greenTexture', 'imgs/jumpingLevel/greenTexture.png');
-            this.game.load.image('redTexture', 'imgs/jumpingLevel/redTexture.png');            
+            this.game.load.image('redTexture', 'imgs/jumpingLevel/redTexture.png');
             this.game.load.image('asteroid', 'imgs/asteroidLevel/asteroid.png', 60, 60);
+            this.game.load.image('asteroidParticle', 'imgs/asteroidLevel/asteroidChunk.png')
             this.game.load.audio('levelMusic', ['audio/jumpingLevelTheme.mp3']);
             this.game.load.audio('jump', 'audio/jump.mp3');
             this.game.load.audio('running', 'audio/running.mp3');

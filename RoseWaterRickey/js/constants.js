@@ -11,7 +11,7 @@ var CONST = {
         world: {
             width: 800,
             height: 600,
-            playerSpawnOffset: 100
+            playerSpawnOffset: 110
         },
         physics: {
             playerXVelocity: 200,
@@ -19,8 +19,8 @@ var CONST = {
             p2Gravity: 200,
             bulletVelocity: 200,
             asteroids: {
-                Velocity: 100,
-                GenerationFrequency: 550
+                Velocity: 130,
+                GenerationFrequency: 400
             }
         }
     }
