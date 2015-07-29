@@ -8,7 +8,8 @@ Game.HowToPlay.prototype = (function () {
         jumpingButton,
         asteroidButton,
         logicButton,
-        controlsText;
+        controlsText,
+        music;
     
     function intializeGroups () {
         initializeJumpingLevel();
@@ -87,8 +88,12 @@ Game.HowToPlay.prototype = (function () {
             this.game.load.image('heroes', 'imgs/howToPlay/heroes.png');
             this.game.load.image('lightsDown', 'imgs/gameOver/lightsDown.png');
             this.game.load.image('menu', 'imgs/gameOver/menuButton.png');
+            this.game.load.audio('helpMenuMusic', ['audio/menuHelpTheme.mp3']);
         },
         create: function () {
+            music = this.game.add.audio('helpMenuMusic');
+            music.play();
+
             this.game.add.sprite(-10, 348, 'lightsDown');
             this.game.add.button(260, 480, 'menu', this.returnToMenu, this.game).scale.setTo(0.75, 0.75);
             this.game.add.sprite(450, 100, 'heroes');
@@ -108,6 +113,7 @@ Game.HowToPlay.prototype = (function () {
             showGroup(layers[currentLayer]);
         },
         returnToMenu: function () {
+            music.stop();
             this.state.start('Menu');
         }
     };

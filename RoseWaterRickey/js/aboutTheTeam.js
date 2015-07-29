@@ -12,7 +12,8 @@ Game.About.prototype = (function () {
             { nickname: 'Bizuuu', participated: 'participated' },
             { nickname: 'ahansb', participated: 'participated' },
             { nickname: 'Boyan1912', participated: 'notParticipated' }
-        ];
+        ],
+        music;
 
     function getRandom (max) {
         return Math.floor((Math.random() * max) + 1);
@@ -38,8 +39,11 @@ Game.About.prototype = (function () {
             this.game.load.image('menu', 'imgs/smallerMenu.png');
             this.game.load.bitmapFont('participated', 'fonts/participated_noStroke.png', 'fonts/participated_noStroke.fnt');
             this.game.load.bitmapFont('notParticipated', 'fonts/notParticipated_noStroke.png', 'fonts/notParticipated_noStroke.fnt');
+            this.game.load.audio('helpMenuMusic', ['audio/menuHelpTheme.mp3']);
         },
         create: function () {
+            music = this.game.add.audio('helpMenuMusic');
+            music.play();
             this.game.add.button(5, 5, 'github', this.redirectToGithub, this.game, 1, 0, 2);
             this.game.add.button(350, 540, 'menu', this.returnToMenu, this.game, 1, 0, 2);
 
@@ -50,6 +54,7 @@ Game.About.prototype = (function () {
             window.open("https://github.com/RoseWaterRickey", "_blank");
         },
         returnToMenu: function () {
+            music.stop();
             this.state.start('Menu');
         }
     };

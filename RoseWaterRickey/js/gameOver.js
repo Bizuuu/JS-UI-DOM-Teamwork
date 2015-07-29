@@ -4,7 +4,8 @@ Game.GameOver = function (game) { };
 
 Game.GameOver.prototype = (function () {
     var music,
-        winnerStampX;
+        winnerStampX,
+        stampSound;
 
     var gameOver = {
 
@@ -18,7 +19,7 @@ Game.GameOver.prototype = (function () {
             this.game.load.image('lightsDown', 'imgs/gameOver/lightsDown.png');
             this.game.load.image('texts', 'imgs/gameOver/texts.png');
             this.game.load.spritesheet('playAgain', 'imgs/gameOver/playAgain.png', 274, 143);
-
+            this.game.load.audio('menuMusic', ['audio/mainTheme.mp3']);
             this.game.load.audio('stamp', ['audio/stamp.mp3']);
 
 
@@ -27,6 +28,10 @@ Game.GameOver.prototype = (function () {
             var batmanGO,
                 supermanGO,
                 texts;
+
+            music = this.game.add.audio('menuMusic');
+            music.play();
+
             //this.game.add.sprite(0, 0, 'background');
             this.game.add.sprite(85, -10, 'gameOver');
 
@@ -47,7 +52,7 @@ Game.GameOver.prototype = (function () {
             this.game.add.tween(supermanGO).to({angle: 0}, 100, Phaser.Easing.Linear.None, true);
 
 
-            music = this.game.add.audio('stamp');
+            stampSound = this.game.add.audio('stamp');
 
 
             if (stats.batman.total < stats.superman.total) {
@@ -65,12 +70,14 @@ Game.GameOver.prototype = (function () {
         },
         announceWinner: function () {
             this.add.sprite(winnerStampX, 80, 'winnerStamp');
-            music.play();
+            stampSound.play();
         },
         returnToMenu: function () {
+            music.stop();
             this.state.start('Menu');
         },
         playAgain: function () {
+            music.stop();
             this.state.start('Jumping');
         }
     };

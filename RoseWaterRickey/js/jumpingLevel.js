@@ -11,6 +11,7 @@ Game.JumpingLevel.prototype = (function () {
         music,
         jump,
         run,
+        fire,
         bulletTime = 0,
         healthBars,
         playerCollisionTime = 0;
@@ -24,6 +25,9 @@ Game.JumpingLevel.prototype = (function () {
 
             case 'run':
                 run.play("", 0, 1, false, false);
+                break;
+            case 'fire':
+                fire.play();
                 break;
         }
 
@@ -71,6 +75,7 @@ Game.JumpingLevel.prototype = (function () {
         }
 
         if (directionKeys.fire.isDown) {
+            playFx('fire');
             fireBullet(player);
         }
 
@@ -163,6 +168,7 @@ Game.JumpingLevel.prototype = (function () {
             this.game.load.audio('levelMusic', ['audio/jumpingLevelTheme.mp3']);
             this.game.load.audio('jump', 'audio/jump.mp3');
             this.game.load.audio('running', 'audio/running.mp3');
+            this.game.load.audio('fire', 'audio/LaserSoundEffect.mp3');
             this.game.load.spritesheet('batman', 'imgs/jumpingLevel/batmanSprite.png', 53, 48);
             this.game.load.spritesheet('superman', 'imgs/jumpingLevel/supermanSprite.png', 53, 55);
             this.game.load.spritesheet('bullet', 'imgs/jumpingLevel/EnemyBullet.png', 60, 60);
@@ -173,6 +179,7 @@ Game.JumpingLevel.prototype = (function () {
             music.play();
             jump = this.game.add.audio('jump');
             run = this.game.add.audio('running');
+            fire= this.game.add.audio('fire');
 
             this.game.add.sprite(0, 0, 'background');
             healthBars = {
