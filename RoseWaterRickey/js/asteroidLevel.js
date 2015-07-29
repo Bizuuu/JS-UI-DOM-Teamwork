@@ -14,7 +14,6 @@ Game.AsteroidLevel.prototype = (function () {
         run,
         asteroid,
         asteroids,
-        emitter,
         healthBars,
         playerCollisionTime = 0,
         asteroidTime = 0;
@@ -26,7 +25,7 @@ Game.AsteroidLevel.prototype = (function () {
                 break;
 
             case 'run':
-                run.play();
+                run.play("", 0, 1, false, false);
                 break;
         }
     }
@@ -64,7 +63,7 @@ Game.AsteroidLevel.prototype = (function () {
 
             if (sprite.body.touching.down) {
                 sprite.animations.play('moveLeft');
-                //playFx('run');
+                playFx('run');
             } else {
                 sprite.animations.play('jumpLeft');
             }
@@ -73,7 +72,7 @@ Game.AsteroidLevel.prototype = (function () {
 
             if (sprite.body.touching.down) {
                 sprite.animations.play('moveRight');
-                //playFx('run');
+                playFx('run');
             } else {
                 sprite.animations.play('jumpRight');
             }
