@@ -19,8 +19,8 @@ var CONST = {
             p2Gravity: 200,
             bulletVelocity: 250,
             asteroids: {
-                Velocity: 130,
-                GenerationFrequency: 600
+                Velocity: 140,
+                GenerationFrequency: 500
             }
         }
     }
