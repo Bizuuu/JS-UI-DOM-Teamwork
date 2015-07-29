@@ -3,15 +3,47 @@ var Game = Game || {};
 Game.About = function (game) {};
 
 Game.About.prototype = (function () {
+    var teamMembersText = {},
+        teamMembers = [
+            { nickname: 'dentia', participated: 'participated' },
+            { nickname: 'alara.kalama', participated: 'participated' },
+            { nickname: 'Stev3n', participated: 'participated' },
+            { nickname: 'Rodoteia.Yordanova', participated: 'participated' },
+            { nickname: 'Bizuuu', participated: 'participated' },
+            { nickname: 'ahansb', participated: 'participated' },
+            { nickname: 'Boyan1912', participated: 'notParticipated' }
+        ];
+
+    function getRandom (max) {
+        return Math.floor((Math.random() * max) + 1);
+    }
+
+    function addTeamMember (member) {
+        var x = getRandom(CONST.game.world.width - 200),
+            y = getRandom(CONST.game.world.height - 100);
+        teamMembersText[member] = this.game.add.bitmapText(x, y, member.participated, member.nickname, 70);
+        teamMembersText[member].inputEnabled = true;
+        teamMembersText[member].input.enableDrag();
+    }
+
+    function loadMembers () {
+        for(var ind = 0, len = teamMembers.length; ind < len; ind += 1){
+            addTeamMember(teamMembers[ind]);
+        }
+    }
+
     var about = {
         preload: function () {
             this.game.load.image('github', 'imgs/github.png');
-            this.game.load.image('menu', 'imgs/menu.png');
+            this.game.load.image('menu', 'imgs/smallerMenu.png');
+            this.game.load.bitmapFont('participated', 'fonts/participated.png', 'fonts/participated.fnt');
+            this.game.load.bitmapFont('notParticipated', 'fonts/notParticipated.png', 'fonts/notParticipated.fnt');
         },
         create: function () {
-            this.game.add.button(350, 80, 'github', this.redirectToGithub, this.game, 1, 0, 2);
-            this.game.add.text(300, 50, 'Check us on GitHub', {font: '30px Consolas', fill: "#ffffff"});
-            this.game.add.button(370, 480, 'menu', this.returnToMenu, this.game, 1, 0, 2);
+            this.game.add.button(5, 5, 'github', this.redirectToGithub, this.game, 1, 0, 2);
+            this.game.add.button(350, 540, 'menu', this.returnToMenu, this.game, 1, 0, 2);
+
+            loadMembers();
         },
         redirectToGithub: function(){
             console.log('github');
