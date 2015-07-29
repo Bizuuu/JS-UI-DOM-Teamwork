@@ -88,6 +88,7 @@ Game.AsteroidLevel.prototype = (function () {
 
     function checkForWinner() {
         if (players.batman.health <= 0 || players.superman.health <= 0) {
+            music.stop();
             game.state.start('GameOver');
         }
     }
@@ -170,6 +171,7 @@ Game.AsteroidLevel.prototype = (function () {
             };
 
             music = this.game.add.audio('levelMusic');
+            music.play();
             jump = this.game.add.audio('jump');
             run = this.game.add.audio('running');
 
@@ -194,7 +196,8 @@ Game.AsteroidLevel.prototype = (function () {
             supermanKeys = getSupermanKeys(this.game);
 
             initPlatform();
-            music.play();
+
+            this.game.input.onDown.add(restartMusic, this);
         },
         update: function () {
             generateAsteroids();

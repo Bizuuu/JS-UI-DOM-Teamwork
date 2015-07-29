@@ -33,7 +33,6 @@ Game.Menu.prototype = (function () {
             this.state.start('About');
         },
         showGameInfo: function () {
-            music.stop();
             this.state.start('HowToPlay');
         }
     };
