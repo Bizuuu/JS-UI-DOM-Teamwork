@@ -14,7 +14,7 @@ function createGame() {
     game.state.add('Asteroid', Game.AsteroidLevel);
     game.state.add('Menu', Game.Menu);
     game.state.add('GameOver', Game.GameOver);
-    game.state.start('Asteroid');
+    game.state.start('Menu');
 }
 
 function update(){

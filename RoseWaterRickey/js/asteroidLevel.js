@@ -33,7 +33,7 @@ Game.AsteroidLevel.prototype = (function () {
         music.restart();
     }
 
-    function initPlatforms() {
+    function initPlatform() {
         platforms = this.game.add.group();
         platforms.enableBody = true;
         log = platforms.create(0, game.world.height - 10, 'log');
@@ -140,7 +140,7 @@ Game.AsteroidLevel.prototype = (function () {
                 superman: new HealthBar(540, 20, game),
             };
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
-            initPlatforms(this);
+            initPlatform(this);
 
             batmanKeys = getBatmanKeys(this.game);
             supermanKeys = getSupermanKeys(this.game);
