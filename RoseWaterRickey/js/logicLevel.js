@@ -91,8 +91,8 @@ Game.LogicLevel.prototype = (function () {
 
     var logicLevel = {
         preload : function() {
-            this.game.load.image('platform', 'imgs/logicLevel/platform.png');
-            this.game.load.image('cube', 'imgs/logicLevel/cube.png');
+            this.game.load.image('platform', 'imgs/logicLevel/platform2.png');
+            this.game.load.image('cube', 'imgs/logicLevel/block.png');
             this.game.load.image('background', 'imgs/logicLevel/logicLevelBackground.png');
             this.game.load.image('pointer', 'imgs/logicLevel/bold.png');
         },
