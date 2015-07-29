@@ -24,15 +24,26 @@ Game.GameOver.prototype = (function () {
         },
         create: function () {
             var batmanGO,
-                supermanGO;
-            this.game.add.sprite(0, 0, 'background');
+                supermanGO,
+                lights,
+                texts;
+            //this.game.add.sprite(0, 0, 'background');
+            this.game.add.sprite(85, 50, 'gameOver');
+            texts = this.game.add.sprite(40, 150, 'texts');
+            texts.scale.setTo(0.9, 0.9);
+            //animate the yoyo effect
+            this.game.add.tween(texts).to({y: 200}, 500, Phaser.Easing.Cubic.InOut, true, 100, 2, true);
+
+            //rotating figures
             batmanGO = this.game.add.sprite(80, 460, 'batman');
             batmanGO.anchor.setTo(0, 0.9);
             batmanGO.angle = -50;
             this.game.add.tween(batmanGO).to({angle: 0}, 100, Phaser.Easing.Linear.None, true);
             this.game.add.tween(batmanGO.scale).to({x: 0.95, y: 0.95}, 100, Phaser.Easing.Linear.None, true);
-            supermanGO = this.game.add.sprite(600, 1, 'superman');
-            supermanGO.anchor.setTo(0.9, 0);
+            supermanGO = this.game.add.sprite(670, 450, 'superman');
+            supermanGO.anchor.setTo(0.9, 0.9);
+            supermanGO.angle = 50;
+            this.game.add.tween(supermanGO).to({angle: 0}, 100, Phaser.Easing.Linear.None, true);
 
 
             music = this.game.add.audio('stamp');
@@ -44,7 +55,10 @@ Game.GameOver.prototype = (function () {
                 winnerStampX = 120;   //120
             }
             this.game.time.events.add(Phaser.Timer.SECOND * 0.5, this.announceWinner, this.game);
-            this.game.add.button(300, 455, 'menu', this.returnToMenu, this.game).scale.setTo(0.75, 0.75);
+            lights = this.game.add.sprite(-10, 348, 'lightsDown');
+            //lights.scale.setTo(0.8, 0.8);
+
+            this.game.add.button(260, 480, 'menu', this.returnToMenu, this.game).scale.setTo(0.75, 0.75);
 
 
         },
