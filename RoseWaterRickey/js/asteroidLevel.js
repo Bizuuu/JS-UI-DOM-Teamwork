@@ -138,7 +138,7 @@ Game.AsteroidLevel.prototype = (function () {
             this.game.add.sprite(0, 0, 'background');
             healthBars = {
                 batman: new HealthBar(20, 20, game),
-                superman: new HealthBar(540, 20, game),
+                superman: new HealthBar(540, 20, game)
             };
 
             music = this.game.add.audio('levelMusic');

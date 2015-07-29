@@ -1,7 +1,7 @@
 var stats = {
     batman: {
         jumping: {
-            score: 0,
+            score: 0
         },
         logic: {
             score: 0,
@@ -17,7 +17,7 @@ var stats = {
     },
     superman: {
         jumping: {
-            score: 0,
+            score: 0
         },
         logic: {
             score: 0,
