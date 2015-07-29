@@ -36,8 +36,8 @@ Game.About.prototype = (function () {
         preload: function () {
             this.game.load.image('github', 'imgs/github.png');
             this.game.load.image('menu', 'imgs/smallerMenu.png');
-            this.game.load.bitmapFont('participated', 'fonts/participated.png', 'fonts/participated.fnt');
-            this.game.load.bitmapFont('notParticipated', 'fonts/notParticipated.png', 'fonts/notParticipated.fnt');
+            this.game.load.bitmapFont('participated', 'fonts/participated_noStroke.png', 'fonts/participated_noStroke.fnt');
+            this.game.load.bitmapFont('notParticipated', 'fonts/notParticipated_noStroke.png', 'fonts/notParticipated_noStroke.fnt');
         },
         create: function () {
             this.game.add.button(5, 5, 'github', this.redirectToGithub, this.game, 1, 0, 2);
