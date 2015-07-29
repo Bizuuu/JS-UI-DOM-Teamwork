@@ -48,7 +48,8 @@ Game.AsteroidLevel.prototype = (function () {
 
     function generateAsteroids() {
         if (game.time.now > asteroidTime) {
-            createAsteroid(asteroids)
+            createAsteroid();
+            createAsteroid();
             asteroidTime = game.time.now + CONST.game.physics.asteroids.GenerationFrequency;
         }
     }
@@ -147,7 +148,7 @@ Game.AsteroidLevel.prototype = (function () {
 
     var asteroidLevel = {
         preload: function () {
-            this.game.load.image('background', 'imgs/jumpingLevel/background.png');
+            this.game.load.image('background', 'imgs/asteroidLevel/background.png');
             this.game.load.image('greenTexture', 'imgs/jumpingLevel/greenTexture.png');
             this.game.load.image('redTexture', 'imgs/jumpingLevel/redTexture.png');
             this.game.load.image('asteroid', 'imgs/asteroidLevel/asteroid.png', 60, 60);

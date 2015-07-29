@@ -20,7 +20,7 @@ var CONST = {
             bulletVelocity: 200,
             asteroids: {
                 Velocity: 130,
-                GenerationFrequency: 400
+                GenerationFrequency: 600
             }
         }
     }

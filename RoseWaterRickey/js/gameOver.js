@@ -17,6 +17,7 @@ Game.GameOver.prototype = (function () {
             this.game.load.image('gameOver', 'imgs/gameOver/gameOver.png');
             this.game.load.image('lightsDown', 'imgs/gameOver/lightsDown.png');
             this.game.load.image('texts', 'imgs/gameOver/texts.png');
+            this.game.load.spritesheet('playAgain', 'imgs/gameOver/playAgain.png', 274, 143);
 
             this.game.load.audio('stamp', ['audio/stamp.mp3']);
 
@@ -25,10 +26,10 @@ Game.GameOver.prototype = (function () {
         create: function () {
             var batmanGO,
                 supermanGO,
-                lights,
                 texts;
             //this.game.add.sprite(0, 0, 'background');
-            this.game.add.sprite(85, 50, 'gameOver');
+            this.game.add.sprite(85, -10, 'gameOver');
+
             texts = this.game.add.sprite(40, 150, 'texts');
             texts.scale.setTo(0.9, 0.9);
             //animate the yoyo effect
@@ -55,19 +56,23 @@ Game.GameOver.prototype = (function () {
                 winnerStampX = 120;   //120
             }
             this.game.time.events.add(Phaser.Timer.SECOND * 0.5, this.announceWinner, this.game);
-            lights = this.game.add.sprite(-10, 348, 'lightsDown');
+            this.game.add.sprite(-10, 348, 'lightsDown');
             //lights.scale.setTo(0.8, 0.8);
+            this.game.add.button(265, 330, 'playAgain', this.playAgain, this.game, 1, 0, 2);
 
             this.game.add.button(260, 480, 'menu', this.returnToMenu, this.game).scale.setTo(0.75, 0.75);
 
 
         },
         announceWinner: function () {
-            this.add.sprite(winnerStampX, 400, 'winnerStamp');
+            this.add.sprite(winnerStampX, 80, 'winnerStamp');
             music.play();
         },
         returnToMenu: function () {
             this.state.start('Menu');
+        },
+        playAgain: function () {
+            this.state.start('Jumping');
         }
     };
 
