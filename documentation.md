@@ -24,7 +24,7 @@ But wait - there's more - you can even jump! Use the **up arrow key** / **W** to
 If you want to **shoot** your enemy, do it with the **down arrow key** / **S**.
 
 ### The asteroids level
-Yes, these two are usually great save mankind, but not today! They are so obsessed with their little competion that they forgot all about saving people, heroism and stuff... A huge meteor shower is comming towards the Earth and it's too late to do anything now. All they have to do is to save themselves by avoiding the meteors.
+Yes, these two are usually great at saving mankind, but not today! They are so obsessed with their little competion that they forgot all about saving people, heroism and stuff... A huge meteor shower is comming towards the Earth and it's too late to do anything now. All they have to do is to save themselves by avoiding the meteors.
 
 ![alt game screenshot](http://prikachi.com/images/589/8270589I.png "Jumping/shooting level")
 
@@ -35,6 +35,9 @@ The Earth is destroyed, these two have serious burns from the previous two round
 Well, think again! They've found a deserted store with nothing but boxes... so they decided to stack them.
 
 ![alt game screenshot](http://prikachi.com/images/617/8270617P.png "The logic level")
+
+It's pretty simple actually.
+**Left and right arrow keys** / **A and D** to move the pointer to the **left or right** and **down arrow key** / **S** to drop a box at the current position. All you have to do is make sure the box you drop stays on the platform for the entire turn. Beware the gravity though... and the slippery surfaces.
 
 ## GitHub Repository URL
 [Team Rose Water Rickey](https://github.com/RoseWaterRickey)
