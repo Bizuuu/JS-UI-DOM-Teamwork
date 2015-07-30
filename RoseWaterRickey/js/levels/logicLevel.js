@@ -123,8 +123,8 @@ Game.LogicLevel.prototype = (function () {
                 superman: this.game.add.sprite(760, 100, 'lives', 0)
             };
 
-            batmanKeys = getBatmanKeys(this.game);
-            supermanKeys = getSupermanKeys(this.game);
+            batmanKeys = getCursorKeys(this.game);
+            supermanKeys = getWasdKeys(this.game);
 
             platformCollisionGroup = game.physics.p2.createCollisionGroup();
             blocksCollisionGroup = game.physics.p2.createCollisionGroup();

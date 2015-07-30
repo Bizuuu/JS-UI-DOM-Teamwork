@@ -2,7 +2,7 @@ var Game = Game || {};
 
 Game.JumpingLevel = function (game) { };
 
-/* globals HealthBar, Phaser, getBatmanKeys, getSupermanKeys, CONST, stats, Player, platformsCoordinates */
+/* globals HealthBar, Phaser, getCursorKeys, getWasdKeys, CONST, stats, Player, platformsCoordinates */
 Game.JumpingLevel.prototype = (function () {
     var platforms,
         log,
@@ -206,8 +206,8 @@ Game.JumpingLevel.prototype = (function () {
                 superman: this.game.add.sprite(610, 10, 'health', 0)
             };
 
-            batmanKeys = getBatmanKeys(this.game);
-            supermanKeys = getSupermanKeys(this.game);
+            batmanKeys = getCursorKeys(this.game);
+            supermanKeys = getWasdKeys(this.game);
 
             players = this.game.add.group();
             bullets = this.game.add.group();

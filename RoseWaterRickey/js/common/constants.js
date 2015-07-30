@@ -5,7 +5,7 @@ var CONST = {
     },
     player: {
         initialLives: 5,
-        maxHealth: 240,
+        maxHealth: 240
     },
     game: {
         world: {
@@ -26,3 +26,4 @@ var CONST = {
     },
     currentLevel: 'Jumping'
 };
+module.exports = CONST;

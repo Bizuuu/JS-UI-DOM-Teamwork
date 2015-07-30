@@ -2,7 +2,7 @@ var Game = Game || {};
 
 Game.AsteroidLevel = function (game) { };
 
-/* globals HealthBar, Phaser, getBatmanKeys, getSupermanKeys, CONST, stats, Player */
+/* globals HealthBar, Phaser, getCursorKeys, getWasdKeys, CONST, stats, Player */
 Game.AsteroidLevel.prototype = (function () {
     var platforms,
         log,
@@ -187,8 +187,8 @@ Game.AsteroidLevel.prototype = (function () {
                 .addPhysics(this, 0.2, 300, 280)
                 .addAnimations([7, 8, 9, 10, 11, 12, 13], [0, 1, 2, 3, 4, 5, 6], [20, 21, 22, 23, 24, 25], [14, 15, 16, 17, 18, 19]);
 
-            batmanKeys = getBatmanKeys(this.game);
-            supermanKeys = getSupermanKeys(this.game);
+            batmanKeys = getCursorKeys(this.game);
+            supermanKeys = getWasdKeys(this.game);
             this.game.input.onDown.add(music.restart, this);
 
             initPlatform();            
