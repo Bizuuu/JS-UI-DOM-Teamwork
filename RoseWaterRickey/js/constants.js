@@ -23,5 +23,6 @@ var CONST = {
                 GenerationFrequency: 500
             }
         }
-    }
+    },
+    currentLevel: 'Jumping'
 };

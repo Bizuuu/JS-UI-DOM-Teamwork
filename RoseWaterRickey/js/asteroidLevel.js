@@ -85,7 +85,7 @@ Game.AsteroidLevel.prototype = (function () {
     function checkForWinner() {
         if (players.batman.health <= 0 || players.superman.health <= 0) {
             music.stop();
-            game.state.start('GameOver');
+            game.state.start('Intermediate');
         }
     }
 
@@ -140,8 +140,8 @@ Game.AsteroidLevel.prototype = (function () {
             this.game.load.image('background', 'imgs/asteroidLevel/background.png');
             this.game.load.image('greenTexture', 'imgs/jumpingLevel/greenTexture.png');
             this.game.load.image('redTexture', 'imgs/jumpingLevel/redTexture.png');
-            this.game.load.image('asteroid', 'imgs/asteroidLevel/asteroid.png', 60, 60);
-            this.game.load.image('asteroidParticle', 'imgs/asteroidLevel/asteroidChunk.png')
+            this.game.load.image('asteroid', 'imgs/asteroidLevel/asteroid.png');
+            this.game.load.image('asteroidParticle', 'imgs/asteroidLevel/asteroidChunk.png');
             this.game.load.audio('levelMusic', ['audio/jumpingLevelTheme.mp3']);
             this.game.load.audio('jump', 'audio/jump.mp3');
             this.game.load.audio('running', 'audio/running.mp3');
@@ -150,6 +150,8 @@ Game.AsteroidLevel.prototype = (function () {
 
         },
         create: function () {
+            CONST.currentLevel = 'Asteroid';
+
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.game.add.sprite(0, 0, 'background');
 

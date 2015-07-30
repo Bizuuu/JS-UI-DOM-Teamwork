@@ -97,6 +97,8 @@ Game.LogicLevel.prototype = (function () {
             this.game.load.image('pointer', 'imgs/logicLevel/bold.png');
         },
         create: function () {
+            CONST.currentLevel = 'Logic';
+
             this.game.physics.startSystem(Phaser.Physics.P2JS);
             this.game.physics.p2.gravity.y = CONST.game.physics.p2Gravity;
 

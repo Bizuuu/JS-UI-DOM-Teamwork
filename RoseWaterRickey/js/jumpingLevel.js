@@ -98,12 +98,12 @@ Game.JumpingLevel.prototype = (function () {
     function checkForWinner() {
         if (players.batman.health <= 0 || players.superman.health <= 0) {
             music.stop();
-            game.state.start('GameOver');
+            game.state.start('Intermediate');
         }
     }
 
     function playerAndBulletCollisionHandler(player, bullet) {
-        var attackingPlayer, shotPlayer
+        var attackingPlayer, shotPlayer;
 
         if (player.key === 'batman') {
             shotPlayer = 'batman';
@@ -175,6 +175,8 @@ Game.JumpingLevel.prototype = (function () {
 
         },
         create: function () {
+            CONST.currentLevel = 'Jumping';
+
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.game.add.sprite(0, 0, 'background');
             music = this.game.add.audio('levelMusic');

@@ -27,8 +27,9 @@ function createGame() {
     game.state.add('Menu', Game.Menu);
     game.state.add('GameOver', Game.GameOver);
     game.state.add('HowToPlay', Game.HowToPlay);
+    game.state.add('Intermediate', Game.Intermediate);
     
-    game.state.start('Jumping');
+    game.state.start('Menu');
 }
 
 function update() {
