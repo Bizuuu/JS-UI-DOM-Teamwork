@@ -19,6 +19,7 @@ Game.LogicLevel.prototype = (function () {
         music;
 
     function endGame() {
+		music.stop();
         this.game.state.start('GameOver');
     }
 
