@@ -20,14 +20,14 @@ Game.JumpingLevel.prototype = (function () {
 
         switch (action) {
             case 'jump':
-                jump.play();
+                jump.play("", 0, 0.25, false, false);
                 break;
 
             case 'run':
-                run.play("", 0, 1, false, false);
+                run.play("", 0, 0.35, false, false);
                 break;
             case 'fire':
-                fire.play();
+                fire.play("", 0, 0.3);
                 break;
         }
 
@@ -176,7 +176,7 @@ Game.JumpingLevel.prototype = (function () {
         },
         create: function () {
             music = this.game.add.audio('levelMusic');
-            music.play();
+            music.play("",0,0.65,true,true);
             jump = this.game.add.audio('jump');
             run = this.game.add.audio('running');
             fire= this.game.add.audio('fire');
