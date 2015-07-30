@@ -78,16 +78,7 @@ Game.GameOver.prototype = (function () {
         },
         playAgain: function () {
             music.stop();
-            CONST.game.counterGame.count+=1;
-            if(CONST.game.counterGame.count%CONST.game.counterGame.levelNumber== 1){
-                this.state.start('Jumping');
-            }
-            if(CONST.game.counterGame.count%CONST.game.counterGame.levelNumber== 2){
-                this.state.start('Asteroid');
-            }
-            if(CONST.game.counterGame.count%CONST.game.counterGame.levelNumber== 0){
-                this.state.start('Logic');
-            }
+            this.state.start('Jumping');
         }
     };
 
