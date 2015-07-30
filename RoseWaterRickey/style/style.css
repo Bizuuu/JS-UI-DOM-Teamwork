@@ -1,0 +1,14 @@
+body {
+    background-color: #020305;
+    overflow: hidden;
+}
+
+canvas {
+    margin: 0 auto;
+}
+
+#svg-container {
+    width: 92%;
+    height: 92%;
+    margin: 0 auto;
+}
