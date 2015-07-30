@@ -135,7 +135,7 @@ Game.AsteroidLevel.prototype = (function () {
         if (game.time.now > playerCollisionTime) {
             stats[jumpingPlayerToString].asteroid.score += 40;
             players[attackedPlayerToString].health -= 17;
-            healthBars[attackedPlayerToString].frame -= 1;
+            healthBars[attackedPlayerToString].frame += 1;
             playerCollisionTime = game.time.now + 500;
         }
     }
