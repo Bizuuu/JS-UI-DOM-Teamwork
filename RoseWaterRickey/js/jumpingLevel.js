@@ -2,6 +2,7 @@ var Game = Game || {};
 
 Game.JumpingLevel = function (game) { };
 
+/* globals HealthBar, Phaser, getBatmanKeys, getSupermanKeys, CONST, stats, Player, platformsCoordinates */
 Game.JumpingLevel.prototype = (function () {
     var platforms,
         log,
@@ -12,6 +13,7 @@ Game.JumpingLevel.prototype = (function () {
         jump,
         run,
         fire,
+        bullets,
         bulletTime = 0,
         healthBars,
         playerCollisionTime = 0;
@@ -31,10 +33,6 @@ Game.JumpingLevel.prototype = (function () {
                 break;
         }
 
-    }
-
-    function restartMusic() {
-        music.restart();
     }
 
     function initPlatforms() {
@@ -74,9 +72,10 @@ Game.JumpingLevel.prototype = (function () {
             sprite.animations.stop();
         }
 
-        if (directionKeys.fire.isDown) {
+        if (directionKeys.fire.isDown && (game.time.now > bulletTime)) {
             playFx('fire');
-            fireBullet(player);
+            createBullet(player);
+            bulletTime = game.time.now + 250;
         }
 
         if (directionKeys.up.isDown && sprite.body.touching.down) {
@@ -85,19 +84,15 @@ Game.JumpingLevel.prototype = (function () {
         }
     }
 
-    function fireBullet(player) {
-        if (game.time.now > bulletTime) {
-            player.addBullet();
-            bulletTime = game.time.now + 250;
+    function createBullet(player) {
+        var bullet;
+        if (player.direction === CONST.direction.right) {
+            bullet = bullets.create(player.sprite.x + player.sprite.width, player.sprite.y + 25, 'bullet');
+            bullet.body.velocity.x = CONST.game.physics.bulletVelocity;
+        } else {
+            bullet = bullets.create(player.sprite.x, player.sprite.y + 25, 'bullet');
+            bullet.body.velocity.x = -CONST.game.physics.bulletVelocity;
         }
-    }
-
-    function updatePlayerBullets(player) {
-        game.physics.arcade.overlap(platforms, player.bullets, function (bullet, platforms) {
-            bullet.kill();
-            player.removeBullet(bullet);
-            emitParticles(bullet.position.x + 5, bullet.position.y + 5, 'bullet', 0.3, 10);
-        }, null, this);
     }
 
     function checkForWinner() {
@@ -107,9 +102,18 @@ Game.JumpingLevel.prototype = (function () {
         }
     }
 
-    function playerAndBulletCollisionHandler(attackingPlayer, shotPlayer, playerSprite, bullet) {
+    function playerAndBulletCollisionHandler(player, bullet) {
+        var attackingPlayer, shotPlayer
+
+        if (player.key === 'batman') {
+            shotPlayer = 'batman';
+            attackingPlayer = 'superman';
+        } else {
+            shotPlayer = 'superman';
+            attackingPlayer = 'batman';
+        }
+
         bullet.kill();
-        players[attackingPlayer].removeBullet(bullet);
         stats[attackingPlayer].jumping.score += 20;
         players[shotPlayer].health -= 20;
         healthBars[shotPlayer].setHealth(players[shotPlayer].health / CONST.player.maxHealth);
@@ -140,22 +144,18 @@ Game.JumpingLevel.prototype = (function () {
         }
     }
 
-    function detectCollisionsWithBullets() {
-        var maxBullets = Math.max(players.superman.bullets.length, players.batman.bullets.length);
-        for (var index = 0; index < maxBullets; index += 1) {
-            // TODO: Add collision sounds
-            this.game.physics.arcade.collide(players.batman.sprite, players.superman.bullets[index], function (batmanSprite, bullet) {
-                playerAndBulletCollisionHandler('superman', 'batman', batmanSprite, bullet);
-            });
-            this.game.physics.arcade.collide(players.superman.sprite, players.batman.bullets[index], function (supermanSprite, bullet) {
-                playerAndBulletCollisionHandler('batman', 'superman', supermanSprite, bullet);
-            });
-        }
-        updatePlayerBullets(players.batman);
-        updatePlayerBullets(players.superman);
+    function detectBulletCollisions() {
+        this.game.physics.arcade.collide(players.batman.sprite, bullets, playerAndBulletCollisionHandler);
+        this.game.physics.arcade.collide(players.superman.sprite, bullets, playerAndBulletCollisionHandler);
+        this.game.physics.arcade.collide(platforms, bullets, function (platform, bullet) {
+            emitParticles(bullet.position.x + 5, bullet.position.y + 5, 'bullet', 0.3, 10);
+            bullet.kill();
+        }, null, this);
     }
 
-    function detectCollisionWithOtherPlayer() {
+    function detectPlayerCollisions() {
+        this.game.physics.arcade.collide(players.batman.sprite, platforms);
+        this.game.physics.arcade.collide(players.superman.sprite, platforms);
         this.game.physics.arcade.collide(players.batman.sprite, players.superman.sprite, playersCollisionHandler);
     }
 
@@ -175,44 +175,43 @@ Game.JumpingLevel.prototype = (function () {
 
         },
         create: function () {
+            this.game.physics.startSystem(Phaser.Physics.ARCADE);
+            this.game.add.sprite(0, 0, 'background');
             music = this.game.add.audio('levelMusic');
-            music.play("",0,0.65,true,true);
             jump = this.game.add.audio('jump');
             run = this.game.add.audio('running');
-            fire= this.game.add.audio('fire');
+            fire = this.game.add.audio('fire');
 
-            this.game.add.sprite(0, 0, 'background');
             healthBars = {
                 batman: new HealthBar(20, 20, game),
                 superman: new HealthBar(540, 20, game),
             };
-            this.game.physics.startSystem(Phaser.Physics.ARCADE);
-            initPlatforms(this);
 
             batmanKeys = getBatmanKeys(this.game);
             supermanKeys = getSupermanKeys(this.game);
 
             players = this.game.add.group();
+            bullets = this.game.add.group();
             players.enableBody = true;
+            bullets.enableBody = true;
+
             players.batman = Object.create(Player)
-                .init(this.game.add.sprite(20, 0, 'batman', 0))
+                .init(this.game.add.sprite(100, 140, 'batman', 0))
                 .addPhysics(this, 0.2, 300, 280)
                 .addAnimations([9, 10, 11, 12, 13, 14, 15, 16, 17], [0, 1, 2, 3, 4, 5, 6, 7, 8], [24, 25, 26, 27, 28, 29], [18, 19, 20, 21, 22, 23]);
 
             players.superman = Object.create(Player)
-                .init(this.game.add.sprite(720, 12, 'superman', 12))
+                .init(this.game.add.sprite(720, 20, 'superman', 12))
                 .addPhysics(this, 0.2, 300, 280)
                 .addAnimations([7, 8, 9, 10, 11, 12, 13], [0, 1, 2, 3, 4, 5, 6], [20, 21, 22, 23, 24, 25], [14, 15, 16, 17, 18, 19]);
 
-            this.game.input.onDown.add(restartMusic, this);
+            initPlatforms(this);
+            music.play("", 0, 0.65, true, true);
+            this.game.input.onDown.add(music.restart, this);
         },
         update: function () {
-            this.game.physics.arcade.collide(players.batman.sprite, platforms);
-            this.game.physics.arcade.collide(players.superman.sprite, platforms);
-
-            detectCollisionsWithBullets();
-            detectCollisionWithOtherPlayer();
-
+            detectPlayerCollisions();
+            detectBulletCollisions();
             checkForWinner();
 
             reactToInput(players.batman, supermanKeys);

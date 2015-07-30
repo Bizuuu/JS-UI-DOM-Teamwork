@@ -29,27 +29,6 @@ var Player = (function() {
 
                 return this;
             },
-            addBullet: function() {
-                var bullet;
-                if (this.direction === CONST.direction.right) {
-                    bullet = game.add.sprite(this.sprite.x + this.sprite.width, this.sprite.y + 25, 'bullet');
-                    game.physics.arcade.enable(bullet);
-                    bullet.body.velocity.x = CONST.game.physics.bulletVelocity;
-                } else {
-                    bullet = game.add.sprite(this.sprite.x, this.sprite.y + 25, 'bullet');
-                    game.physics.arcade.enable(bullet);
-                    bullet.body.velocity.x = -CONST.game.physics.bulletVelocity;
-                }
-
-                this.bullets.push(bullet);
-            },
-            removeBullet: function(bullet) {
-                this.bullets.splice(this.bullets.indexOf(bullet), 1);
-            },
-            get bullets() {
-                this._bullets = this._bullets || [];
-                return this._bullets;
-            },
             get direction() {
                 if (this.framesWithLeftDirection.indexOf(this.sprite.animations.frame) !== -1) {
                     return CONST.direction.left;

@@ -98,7 +98,7 @@ Game.LogicLevel.prototype = (function () {
         },
         create: function () {
             this.game.physics.startSystem(Phaser.Physics.P2JS);
-            this. game.physics.p2.gravity.y = CONST.game.physics.p2Gravity;
+            this.game.physics.p2.gravity.y = CONST.game.physics.p2Gravity;
 
             batmanKeys = getBatmanKeys(this.game);
             supermanKeys = getSupermanKeys(this.game);

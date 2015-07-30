@@ -2,7 +2,7 @@ var Game = Game || {};
 
 Game.AsteroidLevel = function (game) { };
 
-/* globals HealthBar, Phaser, getBatmanKeys, getSupermanKeys, CONST */
+/* globals HealthBar, Phaser, getBatmanKeys, getSupermanKeys, CONST, stats, Player */
 Game.AsteroidLevel.prototype = (function () {
     var platforms,
         log,
@@ -28,10 +28,6 @@ Game.AsteroidLevel.prototype = (function () {
                 run.play("", 0, 1, false, false);
                 break;
         }
-    }
-
-    function restartMusic() {
-        music.restart();
     }
 
     function initPlatform() {
@@ -163,7 +159,6 @@ Game.AsteroidLevel.prototype = (function () {
             };
 
             music = this.game.add.audio('levelMusic');
-            music.play();
             jump = this.game.add.audio('jump');
             run = this.game.add.audio('running');
 
@@ -186,10 +181,10 @@ Game.AsteroidLevel.prototype = (function () {
 
             batmanKeys = getBatmanKeys(this.game);
             supermanKeys = getSupermanKeys(this.game);
+            this.game.input.onDown.add(music.restart, this);
 
-            initPlatform();
-
-            this.game.input.onDown.add(restartMusic, this);
+            initPlatform();            
+            music.play();
         },
         update: function () {
             generateAsteroids();
