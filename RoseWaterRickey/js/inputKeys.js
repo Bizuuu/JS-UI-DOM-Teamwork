@@ -3,7 +3,7 @@ function getBatmanKeys (game) {
         up: game.input.keyboard.addKey(Phaser.Keyboard.UP),
         left: game.input.keyboard.addKey(Phaser.Keyboard.LEFT),
         right: game.input.keyboard.addKey(Phaser.Keyboard.RIGHT),
-        fire: game.input.keyboard.addKey(Phaser.Keyboard.DOWN),
+        fire: game.input.keyboard.addKey(Phaser.Keyboard.DOWN)
     };
 }
 

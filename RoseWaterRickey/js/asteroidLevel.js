@@ -85,9 +85,9 @@ Game.AsteroidLevel.prototype = (function () {
     function checkForWinner() {
         if (players.batman.health <= 0 || players.superman.health <= 0) {
             if(players.batman.health <= 0){
-                stats.superman.asteroid.score += 700;
+                stats.superman.asteroid.score += 900;
             } else {
-                stats.batman.asteroid.score += 700;
+                stats.batman.asteroid.score += 900;
             }
             music.stop();
             game.state.start('Intermediate');
@@ -105,8 +105,8 @@ Game.AsteroidLevel.prototype = (function () {
     }
 
     function asteroidPlayerCollisionHandler(player, asteroid) {             
-        players[player.key].health -= 40;        
-        healthBars[player.key].setHealth(players[player.key].health / CONST.player.maxHealth);  
+        players[player.key].health -= 17;
+        healthBars[player.key].frame += 1;
         emitParticles(asteroid.position.x + 10, asteroid.position.y + 20, 'asteroidParticle', 0.55, 5);
         asteroid.kill();
     }
@@ -134,8 +134,8 @@ Game.AsteroidLevel.prototype = (function () {
         var attackedPlayerToString = attackedPlayer === players.batman ? 'batman' : 'superman';
         if (game.time.now > playerCollisionTime) {
             stats[jumpingPlayerToString].asteroid.score += 40;
-            players[attackedPlayerToString].health -= 40;
-            healthBars[attackedPlayerToString].setHealth(players[attackedPlayerToString].health / CONST.player.maxHealth);
+            players[attackedPlayerToString].health -= 17;
+            healthBars[attackedPlayerToString].frame -= 1;
             playerCollisionTime = game.time.now + 500;
         }
     }
@@ -143,8 +143,8 @@ Game.AsteroidLevel.prototype = (function () {
     var asteroidLevel = {
         preload: function () {
             this.game.load.image('background', 'imgs/asteroidLevel/background.png');
-            this.game.load.image('greenTexture', 'imgs/jumpingLevel/greenTexture.png');
-            this.game.load.image('redTexture', 'imgs/jumpingLevel/redTexture.png');
+            // this.game.load.image('greenTexture', 'imgs/jumpingLevel/greenTexture.png');
+            // this.game.load.image('redTexture', 'imgs/jumpingLevel/redTexture.png');
             this.game.load.image('asteroid', 'imgs/asteroidLevel/asteroid.png');
             this.game.load.image('asteroidParticle', 'imgs/asteroidLevel/asteroidChunk.png');
             this.game.load.audio('levelMusic', ['audio/jumpingLevelTheme.mp3']);
@@ -152,6 +152,7 @@ Game.AsteroidLevel.prototype = (function () {
             this.game.load.audio('running', 'audio/running.mp3');
             this.game.load.spritesheet('batman', 'imgs/jumpingLevel/batmanSprite.png', 53, 48);
             this.game.load.spritesheet('superman', 'imgs/jumpingLevel/supermanSprite.png', 53, 55);
+            this.game.load.spritesheet('health', 'imgs/healthBars.png', 170, 27.6, 15);
 
         },
         create: function () {
@@ -161,8 +162,8 @@ Game.AsteroidLevel.prototype = (function () {
             this.game.add.sprite(0, 0, 'background');
 
             healthBars = {
-                batman: new HealthBar(20, 20, game),
-                superman: new HealthBar(540, 20, game)
+                batman: this.game.add.sprite(20, 10, 'health', 0),
+                superman: this.game.add.sprite(610, 10, 'health', 0)
             };
 
             music = this.game.add.audio('levelMusic');

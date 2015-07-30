@@ -115,8 +115,8 @@ Game.JumpingLevel.prototype = (function () {
 
         bullet.kill();
         stats[attackingPlayer].jumping.score += 150;
-        players[shotPlayer].health -= 20;
-        healthBars[shotPlayer].setHealth(players[shotPlayer].health / CONST.player.maxHealth);
+        players[shotPlayer].health -= 17;
+        healthBars[shotPlayer].frame += 1;
         emitParticles(bullet.position.x + 5, bullet.position.y + 5, 'bullet', 0.3, 10);
     }
 
@@ -138,8 +138,8 @@ Game.JumpingLevel.prototype = (function () {
         var attackedPlayerToString = attackedPlayer === players.batman ? 'batman' : 'superman';
         if (game.time.now > playerCollisionTime) {
             stats[jumpingPlayerToString].jumping.score += 40;
-            players[attackedPlayerToString].health -= 40;
-            healthBars[attackedPlayerToString].setHealth(players[attackedPlayerToString].health / CONST.player.maxHealth);
+            players[attackedPlayerToString].health -= 17;
+            healthBars[attackedPlayerToString].frame += 1;
             playerCollisionTime = game.time.now + 500;
         }
     }
@@ -187,6 +187,7 @@ Game.JumpingLevel.prototype = (function () {
             this.game.load.spritesheet('batman', 'imgs/jumpingLevel/batmanSprite.png', 53, 48);
             this.game.load.spritesheet('superman', 'imgs/jumpingLevel/supermanSprite.png', 53, 55);
             this.game.load.spritesheet('bullet', 'imgs/jumpingLevel/EnemyBullet.png', 60, 60);
+            this.game.load.spritesheet('health', 'imgs/healthBars.png', 170, 27.6, 15);
 
         },
         create: function () {
@@ -201,8 +202,8 @@ Game.JumpingLevel.prototype = (function () {
             fire = this.game.add.audio('fire');
 
             healthBars = {
-                batman: new HealthBar(20, 20, game),
-                superman: new HealthBar(540, 20, game),
+                batman: this.game.add.sprite(20, 10, 'health', 0),
+                superman: this.game.add.sprite(610, 10, 'health', 0)
             };
 
             batmanKeys = getBatmanKeys(this.game);

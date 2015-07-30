@@ -1,4 +1,4 @@
-var HealthBar = function(x, y, game) {
+/*var HealthBar = function(x, y, game) {
 	this.grayHealthbar = game.add.image(x, y, 'grayHealthbar');
 	this.healthbar = game.add.image(x, y, 'healthbar');
 	this.width = this.grayHealthbar.width;
@@ -10,3 +10,4 @@ HealthBar.prototype.setHealth = function(health) {
 	this.healthbar.cropRect.width = this.width * health;
 	this.healthbar.updateCrop();
 };
+	*/
