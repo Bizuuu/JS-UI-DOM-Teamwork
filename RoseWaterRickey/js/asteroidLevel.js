@@ -84,6 +84,11 @@ Game.AsteroidLevel.prototype = (function () {
 
     function checkForWinner() {
         if (players.batman.health <= 0 || players.superman.health <= 0) {
+            if(players.batman.health <= 0){
+                stats.superman.asteroid.score += 700;
+            } else {
+                stats.batman.asteroid.score += 700;
+            }
             music.stop();
             game.state.start('Intermediate');
         }

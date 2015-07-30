@@ -114,7 +114,7 @@ Game.JumpingLevel.prototype = (function () {
         }
 
         bullet.kill();
-        stats[attackingPlayer].jumping.score += 20;
+        stats[attackingPlayer].jumping.score += 150;
         players[shotPlayer].health -= 20;
         healthBars[shotPlayer].setHealth(players[shotPlayer].health / CONST.player.maxHealth);
         emitParticles(bullet.position.x + 5, bullet.position.y + 5, 'bullet', 0.3, 10);
@@ -159,6 +159,21 @@ Game.JumpingLevel.prototype = (function () {
         this.game.physics.arcade.collide(players.batman.sprite, players.superman.sprite, playersCollisionHandler);
     }
 
+    function restartStats () {
+        stats.batman.jumping.score = 0;
+        stats.superman.jumping.score = 0;
+
+        stats.batman.logic.score = 0;
+        stats.superman.logic.score = 0;
+        stats.batman.logic.lives = CONST.player.initialLives;
+        stats.superman.logic.lives = CONST.player.initialLives;
+
+        stats.batman.asteroid.score = 0;
+        stats.superman.asteroid.score = 0;
+        stats.batman.asteroid.lives = CONST.player.initialLives;
+        stats.superman.asteroid.lives = CONST.player.initialLives;
+    }
+
     var jumpingLevel = {
         preload: function () {
             this.game.load.image('background', 'imgs/jumpingLevel/background.png');
@@ -176,6 +191,7 @@ Game.JumpingLevel.prototype = (function () {
         },
         create: function () {
             CONST.currentLevel = 'Jumping';
+            restartStats();
 
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.game.add.sprite(0, 0, 'background');

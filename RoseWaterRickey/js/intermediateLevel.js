@@ -12,9 +12,13 @@ Game.Intermediate.prototype = (function () {
             this.game.load.bitmapFont('redFont', 'fonts/redBitmap_noStroke.png', 'fonts/redBitmap_noStroke.fnt');
         },
         create: function () {
-            this.game.add.bitmapText(20, 100, 'redFont', 'BATMAN', 110);
-            this.game.add.bitmapText(450, 100, 'redFont', 'SUPERMAN', 110);
-            this.game.add.button(256, 318, 'continue', this.continue, this.game, 1, 0, 2);
+            this.game.add.bitmapText(20, 10, 'redFont', 'BATMAN', 110);
+            this.game.add.bitmapText(20, 100, 'greenFont', 'score     ' + stats.batman.total, 70);
+
+            this.game.add.bitmapText(470, 10, 'redFont', 'SUPERMAN', 110);
+            this.game.add.bitmapText(480, 100, 'greenFont', 'score     ' + stats.superman.total, 70);
+
+            this.game.add.button(256, 450, 'continue', this.continue, this.game, 1, 0, 2);
         },
 
         continue: function () {
