@@ -87,7 +87,7 @@ Game.JumpingLevel.prototype = (function () {
     function createBullet(player) {
         var bullet;
         if (player.direction === CONST.direction.right) {
-            bullet = bullets.create(player.sprite.x + player.sprite.width, player.sprite.y + 25, 'bullet');
+            bullet = bullets.create(player.sprite.x + player.sprite.width / 2, player.sprite.y + 25, 'bullet');
             bullet.body.velocity.x = CONST.game.physics.bulletVelocity;
         } else {
             bullet = bullets.create(player.sprite.x, player.sprite.y + 25, 'bullet');
