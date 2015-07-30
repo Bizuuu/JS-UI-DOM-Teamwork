@@ -1,11 +1,12 @@
 var HealthBar = function(x, y, game) {
-	this.redHealthRectangle = game.add.image(x, y, 'redTexture');
-	this.greenHealthRectangle = game.add.image(x, y, 'greenTexture');
-	this.width = this.redHealthRectangle.width;
-	this.x = x;
+	this.grayHealthbar = game.add.image(x, y, 'grayHealthbar');
+	this.healthbar = game.add.image(x, y, 'healthbar');
+	this.width = this.grayHealthbar.width;
+	this.healthbar.cropRect = new Phaser.Rectangle(0, 0, this.healthbar.width, this.healthbar.height);
+	this.healthbar.crop(this.healthbar.cropRect);
 };
 
 HealthBar.prototype.setHealth = function(health) {
-	this.greenHealthRectangle.width = this.width * health;
-	this.greenHealthRectangle.x = this.x + this.width * (1 - health);
+	this.healthbar.cropRect.width = this.width * health;
+	this.healthbar.updateCrop();
 };
