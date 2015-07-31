@@ -107,7 +107,7 @@ Game.LogicLevel.prototype = (function () {
             this.game.load.image('background', 'imgs/logicLevel/logicLevelBackground.png');
             this.game.load.image('pointer', 'imgs/logicLevel/bold.png');
             this.game.load.audio('soundtrack', 'audio/logicLevelTheme.mp3');
-            this.game.load.spritesheet('lives', 'imgs/verticalHealthBars.png', 31, 130, 6);
+            this.game.load.spritesheet('lives', 'imgs/verticalHealthbars.png', 31, 130, 6);
         },
         create: function () {
             CONST.currentLevel = 'Logic';
