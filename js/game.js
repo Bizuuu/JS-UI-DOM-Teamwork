@@ -29,7 +29,7 @@ function createGame() {
     game.state.add('HowToPlay', Game.HowToPlay);
     game.state.add('Intermediate', Game.Intermediate);
     
-    game.state.start('Menu');
+    game.state.start('Asteroid');
 }
 
 function update() {
