@@ -30,6 +30,51 @@
 	        }
 	    }
 
+	    @-moz-keyframes dash {
+        	0% {
+        	    stroke-dashoffset: 2500;
+                fill:#020305;
+        	}
+            80% {
+                fill:#020305;
+            }
+        	100% {
+        	    stroke-offset: 0;
+                fill:#fff;
+
+        	}
+        }
+
+		@-o-keyframes dash {
+        	0% {
+        	    stroke-dashoffset: 2500;
+                fill:#020305;
+        	}
+            80% {
+                fill:#020305;
+            }
+        	100% {
+        	    stroke-offset: 0;
+                fill:#fff;
+
+        	}
+        }
+
+		@keyframes dash {
+        	0% {
+        	    stroke-dashoffset: 2500;
+                fill:#020305;
+        	}
+            80% {
+                fill:#020305;
+            }
+        	100% {
+        	    stroke-offset: 0;
+                fill:#fff;
+
+        	}
+        }
+
         #supermanFill{
             position: absolute;
             -webkit-animation: smooth 4s ease-in;
@@ -44,6 +89,26 @@
             65% { opacity: 0; }
             80% { opacity: 1; }
         }
+
+        @-moz-keyframes smooth {
+            0% {opacity: 0; }
+            65% { opacity: 0; }
+            80% { opacity: 1; }
+        }
+
+        @-o-keyframes smooth {
+            0% {opacity: 0; }
+            65% { opacity: 0; }
+            80% { opacity: 1; }
+        }
+
+        @keyframes smooth {
+             0% {opacity: 0; }
+             65% { opacity: 0; }
+             80% { opacity: 1; }
+        }
+
+
 </style>
 <path id="batmanLine" class="st0" d="M780.258,371.086c-2.315-7.942-6.691-14.891-9.576-21.245
 	c-5.103-11.242-10.648-22.285-16.276-33.273c-12.552-24.518-25.688-48.749-39.167-72.767
